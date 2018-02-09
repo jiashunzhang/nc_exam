@@ -1,0 +1,4 @@
+/* pages/papers/papers.wxss */
+page {
+    background-color: #D0ECE7;
+}

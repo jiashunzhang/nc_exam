@@ -1,0 +1,31 @@
+/**index.wxss**/
+.search_container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  flex: 50rpx 100%;
+}
+.userinfo-avatar {
+  width: 50rpx;
+  height: 50rpx;
+  margin: 0rpx;
+  border-radius: 50%;
+}
+.exam_title_list_container {
+    display: flex;
+    height: 90rpx;
+    width: 100%;
+    flex: row;
+    justify-content: flex-start;
+    align-content: flex-start;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+page {
+    background-color: #FAE5D3;
+}

@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/register/register",
+    "pages/papers/papers",
+    "pages/tests/tests",
+    "pages/tested_detail/tested_detail"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "南仓站教育考试",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "color": "#a9b7b7",
+        "selectedColor": "#11cd6e",
+        "borderStyle": "black",
+        "text": "在线考试",
+        "iconPath": "statics/images/exam.png",
+        "selectedIconPath": "statics/images/exam_selected.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "color": "#a9b7b7",
+        "selectedColor": "#11cd6e",
+        "borderStyle": "black",
+        "text": "在线练习",
+        "iconPath": "statics/images/exam.png",
+        "selectedIconPath": "statics/images/exam_selected.png"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "我的记录"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "系统日志"
+      }
+    ]
+  }
+}

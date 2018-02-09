@@ -1,0 +1,20 @@
+<!--pages/tests/tests.wxml-->
+<view class="container">
+    <view style="width: 100%;display: flex;flex-direction: column;justify-content: center"><text style="text-align: center;font-size:25rpx">—— ◆ {{ test_name }} ◆ ——</text></view>
+    <view class="weui-form-preview" wx:for="{{ tests }}" wx:key="{{ index }}" style="margin-bottom: 20rpx;width: 100%;">
+        <view class="weui-form-preview__hd">
+            <view class="weui-form-preview__item">
+                <view class="weui-form-preview__label" style="font-size: 25rpx">测试时间</view>
+                <view class="weui-form-preview__value">{{ item.date_time }}</view>
+            </view>
+        </view>
+        <view class="weui-form-preview__bd">
+            <view class="weui-form-preview__item">
+                <view class="weui-form-preview__label">得分</view>
+                <view class="weui-form-preivew__value" style="color: {{ item.score >= item.passing_score ? 'green' : 'red' }}">{{ item.score }}分。</view>
+            </view>
+        </view>
+        <view class="weui-form-preview__ft"><button class="weui-form-preview__btn weui-btn_plain-default" data-test-id="{{ item.test_paper_id }}" bind:tap="onTestDetailClicked">查看详情</button>
+        </view>
+    </view>
+</view>
