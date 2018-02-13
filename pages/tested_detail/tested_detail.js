@@ -63,7 +63,6 @@ Page({
             that.setData({
                 question_groups: q_groups
             });
-            console.log(JSON.stringify(q_groups));
         }
       }
     });

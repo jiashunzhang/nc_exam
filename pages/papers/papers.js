@@ -102,4 +102,9 @@ Page({
           url: "../tests/tests?paper_id=" + event.target.dataset.paperId + "&paper_name=" + event.target.dataset.paperName,
       });
   },
+  onTryOneMoreClicked: function(event) {
+      wx.navigateTo({
+          url: '../test/test?paper_id=' + event.target.dataset.paperId + "&paper_name=" + event.target.dataset.paperName,
+      })
+  }
 })
