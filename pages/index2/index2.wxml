@@ -1,0 +1,5 @@
+<view style="margin: 0;padding: 0;display: flex;flex-direction: column;align-items: center">
+    <view class="box2">
+        <view><text class="distant-top">欢迎您，</text><text class="dilate">韩孝</text></view>
+    </view>
+</view>

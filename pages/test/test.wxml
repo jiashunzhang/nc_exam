@@ -1,0 +1,54 @@
+<view style="margin-bottom: 45rpx">
+    <form>
+        <view wx:for="{{ question_groups }}" wx:key="type_name">
+            <questions>
+                <view slot="type_name">{{ item.type_name }}</view>
+                <view slot="questions">
+                    <view wx:for="{{ item.detail }}" wx:key="*this" style="display: flex;flex-direction: column" wx:for-item="ques">
+                        <view wx:if="{{ ques.type_name == '选择题' }}">
+                            <text decode="{{ true }}">&nbsp;&nbsp;&nbsp;&nbsp;{{ index + 1 }}. {{ ques.question_title }}</text>
+                            <radio-group name="{{ ques.question_id }}">
+                                <view wx:for="{{ ques.question_answer_texts }}" wx:key="*this">
+                                    <view style="display: flex;flex-direction: row;align-items: center">
+                                        <text decode="{{ true }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
+                                        <radio value="{{ item.header }}" checked="{{ false }}" /><text>{{ item.header }}.</text>
+                                        <text>{{ item.body }}</text>
+                                        <text style="height: 15rpx"> </text>
+                                    </view>
+                                </view>
+                            </radio-group>
+                        </view>
+                        <view wx:if="{{ ques.type_name == '多选题' }}">
+                            <text decode="{{ true }}">&nbsp;&nbsp;&nbsp;&nbsp;{{ index + 1 }}. {{ ques.question_title }}</text>
+                            <checkbox-group name="{{ ques.question_id }}">
+                                <view wx:for="{{ ques.question_answer_texts }}" wx:key="*this">
+                                    <view style="display: flex;flex-direction: row;align-items: center">
+                                        <text decode="{{ true }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
+                                        <checkbox value="{{ item.header }}" checked="{{ false }}" /><text>{{ item.header }}.</text>
+                                        <text>{{ item.body }}</text>
+                                        <text style="height: 15rpx"> </text>
+                                    </view>
+                                </view>
+                            </checkbox-group>
+                        </view>
+                        <view wx:if="{{ ques.type_name == '判断题' }}">
+                            <text decode="{{ true }}">&nbsp;&nbsp;&nbsp;&nbsp;{{ index + 1 }}. {{ ques.question_title }}</text>
+                            <radio-group name="{{ ques.question_id }}">
+                                <view wx:for="{{ ques.question_answer_texts }}" wx:key="*this">
+                                    <view style="display: flex;flex-direction: row;align-items: center">
+                                        <text decode="{{ true }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
+                                        <radio value="{{ item.body }}" checked="{{ false }}" /><text>{{ item.header }}.</text>
+                                        <text>{{ item.body }}</text>
+                                        <text style="height: 15rpx"> </text>
+                                    </view>
+                                </view>
+                            </radio-group>
+                        </view>
+                        <text style="height: 10rpx"> </text>
+                    </view>
+                </view>
+            </questions>
+        </view>
+    </form>
+    <view style="position: fixed;bottom: 0rpx;width: 100%;background-color: #D19275;opacity: 0.9">测试</view>
+</view>
