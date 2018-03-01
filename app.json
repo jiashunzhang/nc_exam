@@ -1,12 +1,14 @@
 {
     "pages": [
+        "pages/welcome/welcome",
         "pages/index/index",
         "pages/logs/logs",
         "pages/register/register",
         "pages/papers/papers",
         "pages/tests/tests",
         "pages/tested_detail/tested_detail",
-        "pages/test/test"
+        "pages/test/test",
+        "pages/index2/index2"
     ],
     "window": {
         "backgroundTextStyle": "light",
