@@ -1,12 +1,12 @@
-// pages/index2/index2.js
+// pages/index2/exam/exam.js
 Page({
 
   /**
    * 页面的初始数据
    */
-data: {
-    userName: "韩孝"
-},
+  data: {
+  
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -62,10 +62,5 @@ data: {
    */
   onShareAppMessage: function () {
   
-  },
-    onCardTap: function(event) {
-        wx.navigateTo({
-            url: "./" + event.currentTarget.dataset.tapName + "/" + event.currentTarget.dataset.tapName
-        });
-    }
+  }
 })

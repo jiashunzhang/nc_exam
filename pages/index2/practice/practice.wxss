@@ -1,66 +1,15 @@
-.box2{
-    margin: 20rpx auto;
-    width: 85%;
-    min-height: 135rpx;
-    padding: 10rpx;
-    position:relative;
-    background: -webkit-gradient(linear, 0% 20%, 0% 92%, from(#f3f3f3), to(#fff), color-stop(.1,#f3f3f3));
-    background: linear-gradient(to bottom, #F3F3F3 20%, #FFF 92%);
-    border-top: 1rpx solid #ccc;
-    border-right: 1rpx solid #ccc;
-    -webkit-border-bottom-right-radius: 60rpx 60rpx;
-    -webkit-box-shadow: -1rpx 2rpx 2rpx rgba(0, 0, 0, 0.2);
-    border-bottom-right-radius: 60rpx 60rpx;
-    box-shadow: -1rpx 2rpx 2rpx rgba(0, 0, 0, 0.2);    
+.bevel {
+    font-family: cursive;
+    color: #E9967A;
+    font-size: 50rpx;
+    text-shadow: -1rpx -1rpx 1rpx #000, 0 -1rpx 1rpx #000,
+    1rpx -1rpx 1rpx #000, 1rpx 0 1rpx #000, 1rpx 1rpx 1rpx #000,
+    0 1rpx 1rpx #000, -1rpx 1rpx 1rpx #000, -1rpx 0 1rpx #000, 0 0 4rpx #000
 }
-.box2:before{
-    content:'';
-    width: 25rpx;
-    height: 20rpx;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    -webkit-border-bottom-right-radius: 30rpx;
-    -webkit-box-shadow: -2rpx -2rpx 5rpx rgba(0, 0, 0, 0.3);
-    -webkit-transform: rotate(-20deg) skew(-40deg,-3deg) translate(-13rpx,-13rpx);
-    border-bottom-right-radius: 30rpx;
-    box-shadow: -2rpx -2rpx 5rpx rgba(0, 0, 0, 0.3);
-    transform: rotate(-20deg) skew(-40deg,-3deg) translate(-13rpx,-13rpx);
+.bevel, .bevel:after {
+    -webkit-filter: url(#light2);
+    filter: url(#light2)
 }
-.box2:after{
-    content: '';
-    z-index: -1;
-    width: 100rpx;
-    height: 100rpx;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.2);
-    display: inline-block;
-    -webkit-box-shadow: 20rpx 20rpx 8rpx rgba(0, 0, 0, 0.2);
-    -webkit-transform: rotate(0deg)
-                        translate(-45rpx,-20rpx)
-                           skew(20deg);
-    box-shadow: 20rpx 20rpx 8rpx rgba(0, 0, 0, 0.2);
-    transform: rotate(0deg)
-                        translate(-45rpx,-20rpx)
-                           skew(20deg);
-}
-.dilate {
-    color: red;
-    text-shadow: 0 0 1rpx currentColor, -1rpx -1rpx 1rpx #300, 0 -1rpx 1rpx #300, 1rpx -1rpx 1rpx #300, 1rpx 0 1rpx #300, 1rpx 1rpx 1rpx #300, 0 1rpx 1rpx #300, -1rpx 1rpx 1rpx #300, -1rpx 0 1rpx #300
-}
-.distant-top {
-    font-weight: bold;
-    color: orange;
-    text-shadow: 0 0 1rpx currentColor, -1rpx -1rpx 1rpx #030, 0 -1rpx 1rpx #030, 1rpx -1rpx 1rpx #030, 1rpx 0 1rpx #030, 1rpx 1rpx 1rpx #030, 0 1rpx 1rpx #030, -1rpx 1rpx 1rpx #030, -1rpx 0 1rpx #030
-}
-.distant1 {
-    color: green;
-    font-weight: bold;
-    text-shadow: 0 0 1rpx currentColor, -1rpx -1rpx 1rpx #030, 0 -1rpx 1rpx #030, 1rpx -1rpx 1rpx #030, 1rpx 0 1rpx #030, 1rpx 1rpx 1rpx #030, 0 1rpx 1rpx #030, -1rpx 1rpx 1rpx #030, -1rpx 0 1rpx #030
-}
-
 page {
     background-attachment: fixed;
     background-repeat: no-repeat;

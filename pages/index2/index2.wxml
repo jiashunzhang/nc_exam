@@ -1,5 +1,28 @@
 <view style="margin: 0;padding: 0;display: flex;flex-direction: column;align-items: center">
     <view class="box2">
-        <view><text class="distant-top">欢迎您，</text><text class="dilate">韩孝</text></view>
+        <view style="display: flex;flex-direction: row;justify-content: center">
+            <text class="distant-top">欢迎您，</text>
+            <text class="dilate">{{ userName }}</text>
+        </view>
+        <view style="display: flex;flex-direction: row;justify-content: center">
+            <text class="distant-top">本月已练习</text>
+            <text class="distant1">100</text>
+            <text class="distant-top">次，平均</text>
+            <text class="distant1">99</text>
+            <text class="distant-top">分。</text>
+        </view>
+    </view>
+    <view style="width: 95%;display: flex;flex-direction: row;flex-wrap: wrap;justify-content: center">
+        <template is="navCard" data="{{ img_url: '../../statics/images/exam.png', text: '在线练习', bg_color: '#00CED1', tap_name: 'practice' }}" />
+        <template is="navCard" data="{{ img_url: '../../statics/images/exam_selected.png', text: '在线考试', bg_color: '#E9967A' }}" />
+        <template is="navCard" data="{{ img_url: '../../statics/images/stat.png', text: '错题统计', bg_color: '#F0E68C' }}" />
+        <template is="navCard" data="{{ img_url: '../../statics/images/exam_info.png', text: '考试信息', bg_color: '#90EE90' }}" />
+        <template is="navCard" data="{{ img_url: '../../statics/images/edu.png', text: '业务学习', bg_color: '#DDA0DD' }}" />
     </view>
 </view>
+<template name="navCard">
+    <view bind:tap="onCardTap" data-tap-name="{{ tap_name }}" style="margin: 20rpx 20rpx 20rpx 20rpx;display: flex;flex-direction: column;align-items: center;height: 190rpx;width: 190rpx;background-color: {{ bg_color }};border-radius: 15rpx">
+        <image src="{{ img_url }}" style="width: 100rpx;height: 100rpx;margin-top:25rpx;margin-bottom: 15rpx"></image>
+        <text style="font-size: 25rpx">{{ text }}</text>
+    </view>
+</template>

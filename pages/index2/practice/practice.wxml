@@ -1,0 +1,4 @@
+<view style="display: flex;flex-direction: column;align-items: center;width: 100%;height: 100%">
+    <button type="default" style="margin: 20rpx 0 20rpx 0"><text class="bevel">职工星级管理理论练习</text></button>
+    <button type="default" style="margin: 20rpx 0 20rpx 0"><text class="bevel">职工星级管理实作练习</text></button>
+</view>

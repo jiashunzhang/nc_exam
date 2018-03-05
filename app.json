@@ -8,7 +8,9 @@
         "pages/tests/tests",
         "pages/tested_detail/tested_detail",
         "pages/test/test",
-        "pages/index2/index2"
+        "pages/index2/index2",
+        "pages/index2/practice/practice",
+        "pages/index2/exam/exam"
     ],
     "window": {
         "backgroundTextStyle": "light",
