@@ -100,5 +100,10 @@ onLoad: function (options) {
         wx.navigateTo({
             url: "../index2/index2"
         }); 
+    },
+    onOtherUserLogin: function(event) {
+        wx.navigateTo({
+            url: "../register/register"
+        });
     }
 })

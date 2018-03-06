@@ -2,25 +2,33 @@
 <view class="container">
     <view class="info-line" style="font-size: 55rpx">新用户注册</view>
     <view style="margin-bottom: 40rpx">----------------</view>
-    <view class="info-line">真实姓名：<input type="text" placeholder="请输入真实姓名" style="width: 320rpx;text-align: center;border-bottom: 5rpx ridge black"></input></view>
-    <view class="info-line">
-        所属工种：<picker style="box-shadow: 0rpx 10rpx 5rpx #888888;width: 320rpx" range="{{work_type_list}}" value="{{work_type_list_index}}" range-key="name" bindchange="onWorkTypeList_Change">
-            <view class="picker" style="text-align: center">
-                {{work_type_list[work_type_list_index]["name"]}}
-            </view>
-        </picker>
-    </view>
-    <view class="info-line">
-        所属车间：<picker style="box-shadow: 0rpx 10rpx 5rpx #888888;width: 320rpx" range="{{workshop_list}}" value="{{workshop_list_index}}" range-key="name" bindchange="onWorkShopList_Change">
-            <view class="picker" style="text-align: center">
-                {{workshop_list[workshop_list_index]["name"]}}
-            </view>
-        </picker>
-    </view>
-    <view class="info-line">
-        手机号码：<input type="text" placeholder="请输入手机号码" style="width: 320rpx;text-align: center;border-bottom: 5rpx ridge black "></input>
-    </view>
-    <view class="info-line">
-        <button>提交</button>
-    </view>
+    <form bind:submit="onRegisterSubmit">
+      <view class="info-line">真实姓名（必填）：<input type="text" name="username" placeholder="请输入真实姓名" style="width: 320rpx;text-align: center;border-bottom: 5rpx ridge black"></input></view>
+      <view class="info-line">
+          所属工种（必选）：<picker style="box-shadow: 0rpx 10rpx 5rpx #888888;width: 320rpx" name="worktype" range="{{ work_type_list }}" value="{{ work_type_list_index }}" range-key="name" bindchange="onWorkTypeList_Change">
+              <view class="picker" style="text-align: center">
+                  {{ work_type_list[work_type_list_index]["name"] }}
+              </view>
+          </picker>
+      </view>
+      <view class="info-line">
+          所属车间（必选）：<picker style="box-shadow: 0rpx 10rpx 5rpx #888888;width: 320rpx" name="department" range="{{ workshop_list }}" value="{{ workshop_list_index }}" range-key="name" bindchange="onWorkShopList_Change">
+              <view class="picker" style="text-align: center">
+                  {{ workshop_list[workshop_list_index]["name"] }}
+              </view>
+          </picker>
+      </view>
+      <view class="info-line">
+          身份证号码（必填）：<input type="text" name="idcard" placeholder="请输入身份证号码" style="width: 320rpx;text-align: center;border-bottom: 5rpx ridge black "></input>
+      </view>
+      <view class="info-line">
+          手机号码（选填）：<input type="text" name="phonenumber" placeholder="请输入手机号码" style="width: 320rpx;text-align: center;border-bottom: 5rpx ridge black "></input>
+      </view>
+      <view wx:if="{{ submitFailedMsg }}" class="info-line">
+          <text style="color: red">{{ submitFailedMsg }}</text>
+      </view>
+      <view class="info-line">
+          <button form-type="submit">提交</button>
+      </view>
+    </form>
 </view>
