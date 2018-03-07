@@ -5,15 +5,54 @@ Page({
    * 页面的初始数据
    */
 data: {
-    userName: "韩孝"
+    userName: "未知",
+    practice_count: 0,
+    avg_score: 0
 },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-  
-  },
+    onLoad: function (options) {
+        var that = this;
+        var my_session_key = wx.getStorageSync('my_session_key');
+
+        wx.request({
+            url: "https://ncexam.jingjingjing.wang/getIndexInfo",
+            header: {
+                "Cookie": my_session_key,
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            method: "POST",
+            success: function (data, statusCode, header) {
+                var resp = data.data;
+                console.log(JSON.stringify(resp));
+                if(resp.errmsg != undefined && resp.errmsg != null && resp.errmsg != "") {
+                    if(resp.errmsg == "notloggedin")
+                        wx.redirectTo({
+                            url: "../../welcome/welcome"
+                        });
+                    else {
+                        wx.showToast({
+                            title: resp.errmsg,
+                            image: "../../statics/images/warning.png",
+                            duration: 3000
+                        });
+                        wx.redirectTo({
+                            url: "../../welcome/welcome"
+                        });
+                    }
+                }
+                else {
+                    that.setData({
+                        userName: resp.mem_name,
+                        practice_count: resp.tests_count,
+                        avg_score: resp.avg_score
+                    });
+                }
+            }
+        })
+    },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

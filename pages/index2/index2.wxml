@@ -6,9 +6,9 @@
         </view>
         <view style="display: flex;flex-direction: row;justify-content: center">
             <text class="distant-top">本月已练习</text>
-            <text class="distant1">100</text>
+            <text class="distant1">{{ practice_count }}</text>
             <text class="distant-top">次，平均</text>
-            <text class="distant1">99</text>
+            <text class="distant1">{{ avg_score }}</text>
             <text class="distant-top">分。</text>
         </view>
     </view>

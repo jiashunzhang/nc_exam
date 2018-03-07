@@ -19,8 +19,9 @@ App({
                     "content-type": "application/json"
                 },
                 success: function (data, statusCode, header) {
+                    console.log(JSON.stringify(data.data));
                     if(data.data.errmsg) {
-                        if(data.data.errmsg == "nosuchmember")
+                        /*if(data.data.errmsg == "nosuchmember")
                         {
                             wx.showModal({
                                 title: '异常',
@@ -32,10 +33,25 @@ App({
                                 }
                             });
                         }
-                        else if(data.data.errmsg == "notverified")
+                        else */if(data.data.errmsg == "notverified")
                             wx.showModal({
                                 title: '异常',
                                 content: '用户尚未通过管理员审核，请等待审核。',
+                                success: function(res) {
+                                    wx.redirectTo({
+                                        url: '../welcome/welcome?rejectlogin=1'
+                                    });
+                                }
+                            });
+                        else if(data.data.errmsg == "deletedmember")
+                            wx.showModal({
+                                title: '异常',
+                                content: '用户已被禁用，请联系管理员。',
+                                success: function (res) {
+                                    wx.redirectTo({
+                                        url: '../welcome/welcome?rejectlogin=1'
+                                    });
+                                }
                             });
                         else
                             wx.showModal({
@@ -87,7 +103,7 @@ App({
                     }
                 });
             }
-            console.log(JSON.stringify(res));
+            //console.log(JSON.stringify(res));
         }
     });
   },

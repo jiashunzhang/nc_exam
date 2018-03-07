@@ -4,6 +4,6 @@
     <text class="title">南仓站职工微信答题系统</text>
     <image src="{{ userInfo.avatarUrl }}" style="width: 128rpx;height: 128rpx;margin-top: 160rpx"></image>
     <text style="margin-bottom: 80rpx">{{ userInfo.nickName }}</text>
-    <button type="primary" style="margin: 15rpx" bind:tap="onCurrentUserLogin">使用当前用户使用</button><button type="default" bind:tap="onOtherUserLogin">使用其他用户登录</button>
+    <button wx:if="{{ !rejectlogin }}" type="primary" style="margin: 15rpx" bind:tap="onCurrentUserLogin">使用当前用户使用</button><button type="default" bind:tap="onOtherUserLogin">使用其他用户登录</button>
     <text style="position: absolute;bottom: 0;font-size: 25rpx;color: white">南仓站信息化车间©{{ curYear }}</text>
 </view>
