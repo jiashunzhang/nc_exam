@@ -18,7 +18,8 @@ Page({
         q_cata_index: ["一、", "二、", "三、"],
         question_micro_view: {},
         question_micro_view_arr: [],
-        qmv_hidden: true
+        qmv_hidden: true,
+        window_height: "0"
     },
 
   /**
@@ -27,9 +28,14 @@ Page({
   onLoad: function (options) {
       var that = this;
       var my_session_key = wx.getStorageSync('my_session_key');
+      var w_height = "0";
+      var res = wx.getSystemInfoSync();
+
       this.setData({
           count_down_seconds: parseInt(options.test_time),
-          paper_id: options.paper_id
+          paper_id: options.paper_id,
+          window_height: res.windowHeight + "px",
+          qmv_hidden: true
       });
       wx.request({
           url: "https://ncexam.jingjingjing.wang/getRandomTest",
@@ -225,23 +231,34 @@ Page({
         var qmv = this.data.question_micro_view;
         var q_groups = this.data.question_groups;
 
-        for(var i in q_groups) {
+        /*for(var i in q_groups) {
+            var index = 0;
             var d = q_groups[i].detail;
             for(var j in d) {
-                qmv_arr.push({ "id": d[j].question_id, "done": qmv[d[j].question_id]})
+                index++;
+                qmv_arr.push({ "id": d[j].question_id, "done": qmv[d[j].question_id], "index": index })
+            }
+        }*/
+
+        for(var i in q_groups) {
+            var d = q_groups[i].detail;
+            for (var j in d) {
+                d[j]["done"] = qmv[d[j].question_id];
             }
         }
-
+console.log(JSON.stringify(q_groups));
         /*for(var i in qmv) {
             qmv_arr.push({ "id":  i, "done": qmv[i]});
         }*/
         this.setData({
-            question_micro_view_arr: qmv_arr,
+            question_groups: q_groups,
             qmv_hidden: (!this.data.qmv_hidden)
         });
     },
     onSeekQuestion: function(event) {
-        
+        this.setData({
+            to_view: event.target.dataset.id
+        });
     }
 });
 function countDown(that) {
