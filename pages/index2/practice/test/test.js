@@ -19,7 +19,7 @@ Page({
         question_micro_view: {},
         question_micro_view_arr: [],
         qmv_hidden: true,
-        window_height: "0"
+        window_height: "0",
     },
 
   /**
@@ -28,15 +28,16 @@ Page({
   onLoad: function (options) {
       var that = this;
       var my_session_key = wx.getStorageSync('my_session_key');
-      var w_height = "0";
       var res = wx.getSystemInfoSync();
 
       this.setData({
           count_down_seconds: parseInt(options.test_time),
           paper_id: options.paper_id,
           window_height: res.windowHeight + "px",
+          window_width: res.windowWidth + "px",
           qmv_hidden: true
       });
+      console.log(this.data.window_width);
       wx.request({
           url: "https://ncexam.jingjingjing.wang/getRandomTest",
           data: {
@@ -177,7 +178,35 @@ Page({
             done_count: propertyCount(this.data.done)
         });
     },
-    onHandin: function(e) {
+    onHandin: function (e) {
+        var handin = false;
+        if(this.data.done_count != this.data.question_count) {
+            wx.showModal({
+                title: "提示",
+                content: "您还有" + (this.data.question_count - this.data.done_count) + "道试题未进行解答，是否仍然继续交卷？\n单击“确定”交卷，单击“取消”继续答题。",
+                success: function(res) {
+                    if(res.confirm)
+                        handin = true;
+                    else if(res.cancel)
+                        handin = false;
+                }
+            });
+        }
+        else {
+            wx.showModal({
+                title: "提示",
+                content: "您已答完全部试题，是否交卷？\n单击“确定”交卷，单击“取消”继续答题。",
+                success: function (res) {
+                    if (res.confirm)
+                        handin = true;
+                    else if (res.cancel)
+                        handin = false;
+                }
+            });
+        }
+        if(!handin)
+            return;
+            
         var paper_detail = e.detail.value;
         for(var i in paper_detail) {
             if(isArray(paper_detail[i])) {
@@ -246,7 +275,6 @@ Page({
                 d[j]["done"] = qmv[d[j].question_id];
             }
         }
-console.log(JSON.stringify(q_groups));
         /*for(var i in qmv) {
             qmv_arr.push({ "id":  i, "done": qmv[i]});
         }*/

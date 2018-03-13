@@ -54,25 +54,27 @@
             <text style="flex-grow:1;color: green" bind:tap="onMicroView">{{ done_count }}/{{ question_count }}</text>
             <button size="mini" style="font-weight: bold" form-type="submit">交卷</button>
         </view>
-        <view wx:if="{{ qmv_hidden }}" style="display: flex;flex-direction: row;position: fixed;bottom: 70rpx;width: 100%;background-color: #D19275;opacity: 0.9;align-items: flex-start;align-content: flex-start;justify-content: flex-start;flex-wrap: wrap">
+        <view wx:if="{{ !qmv_hidden }}" style="display: flex;flex-direction: column;position: fixed;bottom: 70rpx;width: 100%;background-color: #D19275;opacity: 0.9;align-items: flex-start;align-content: flex-start;justify-content: flex-start">
             <!--<view wx:for="{{ question_micro_view_arr }}" data-id="view-{{ item.id }}" bind:tap="onSeekQuestion" wx:key="*this" style="display: flex;justify-content: center;align-items: center;width: 60rpx;height: 60rpx;font-size: 20rpx;margin:5rpx 5rpx 5rpx 5rpx;border-color: black;border-width: 1rpx;border-style: solid;background-color: {{ item.done ? 'green' : 'white' }}">
                 {{ index + 1 }}
             </view>-->
-            <view wx:for="{{ question_groups }}" wx:key="*this" style="display: flex;flex-direction: column">
+            <view wx:for="{{ question_groups }}" wx:key="*this" style="display: flex;flex-direction: column;width: 100%">
                 <text style="font-size: 20rpx">{{ q_cata_index[index] }}{{ item.type_name }}</text>
-                <view wx:for="{{ item.detail }}" wx:for-item="ques" wx:key="*this" style="display: flex;flex-direction: row;position: fixed;bottom: 70rpx;width: 100%;align-items: flex-start;align-content: flex-start;justify-content: flex-start;flex-wrap: wrap">
-                    <view wx:if="{{ ques.type_name == '选择题' }}" data-id="view-{{ ques.question_id }}" bind:tap="onSeekQuestion" wx:key="*this" style="display: flex;justify-content: center;align-items: center;width: 60rpx;height: 60rpx;font-size: 20rpx;margin:5rpx 5rpx 5rpx 5rpx;border-color: black;border-width: 1rpx;border-style: solid;background-color: {{ ques.done ? 'green' : 'white' }}">
-                        {{ index + 1 }}
+                <view style="display: flex;flex-direction: row;flex-wrap: wrap;width: 100%">
+                    <view wx:for="{{ item.detail }}" wx:key="*this" style="display: flex;flex-direction: row">
+                        <view wx:if="{{ item.type_name == '选择题' }}" data-id="view-{{ item.question_id }}" bind:tap="onSeekQuestion" wx:key="*this" style="display: flex;justify-content: center;align-items: center;width: 60rpx;height: 60rpx;font-size: 30rpx;font-weight: bold;margin:5rpx 5rpx 5rpx 5rpx;border-color: black;border-width: 1rpx;border-style: solid;background-color: {{ item.done ? 'green' : 'white' }}">
+                            {{ index + 1 }}
+                        </view>
                     </view>
-                </view>
-                <view wx:for="{{ item.detail }}" wx:key="*this" style="display: flex;flex-direction: row;position: fixed;bottom: 70rpx;width: 100%;align-items: flex-start;align-content: flex-start;justify-content: flex-start;flex-wrap: wrap">
-                    <view wx:if="{{ item.type_name == '多选题' }}" data-id="view-{{ item.question_id }}" bind:tap="onSeekQuestion" wx:key="*this" style="display: flex;justify-content: center;align-items: center;width: 60rpx;height: 60rpx;font-size: 20rpx;margin:5rpx 5rpx 5rpx 5rpx;border-color: black;border-width: 1rpx;border-style: solid;background-color: {{ item.done ? 'green' : 'white' }}">
-                        {{ index + 1 }}
+                    <view wx:for="{{ item.detail }}" wx:key="*this" style="display: flex;flex-direction: row">
+                        <view wx:if="{{ item.type_name == '多选题' }}" data-id="view-{{ item.question_id }}" bind:tap="onSeekQuestion" wx:key="*this" style="display: flex;justify-content: center;align-items: center;width: 60rpx;height: 60rpx;font-size: 30rpx;font-weight: bold;margin:5rpx 5rpx 5rpx 5rpx;border-color: black;border-width: 1rpx;border-style: solid;background-color: {{ item.done ? 'green' : 'white' }}">
+                            {{ index + 1 }}
+                        </view>
                     </view>
-                </view>
-                <view wx:for="{{ item.detail }}" wx:key="*this" style="display: flex;flex-direction: row;position: fixed;bottom: 70rpx;width: 100%;align-items: flex-start;align-content: flex-start;justify-content: flex-start;flex-wrap: wrap">
-                    <view wx:if="{{ item.type_name == '判断题' }}" data-id="view-{{ item.question_id }}" bind:tap="onSeekQuestion" wx:key="*this" style="display: flex;justify-content: center;align-items: center;width: 60rpx;height: 60rpx;font-size: 20rpx;margin:5rpx 5rpx 5rpx 5rpx;border-color: black;border-width: 1rpx;border-style: solid;background-color: {{ item.done ? 'green' : 'white' }}">
-                        {{ index + 1 }}
+                    <view wx:for="{{ item.detail }}" wx:key="*this" style="display: flex;flex-direction: row">
+                        <view wx:if="{{ item.type_name == '判断题' }}" data-id="view-{{ item.question_id }}" bind:tap="onSeekQuestion" wx:key="*this" style="display: flex;justify-content: center;align-items: center;width: 60rpx;height: 60rpx;font-size: 30rpx;font-weight: bold;margin:5rpx 5rpx 5rpx 5rpx;border-color: black;border-width: 1rpx;border-style: solid;background-color: {{ item.done ? 'green' : 'white' }}">
+                            {{ index + 1 }}
+                        </view>
                     </view>
                 </view>
             </view>

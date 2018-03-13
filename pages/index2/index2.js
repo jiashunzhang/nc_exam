@@ -48,7 +48,7 @@ data: {
                     that.setData({
                         userName: resp.mem_name,
                         practice_count: resp.tests_count,
-                        avg_score: resp.avg_score,
+                        avg_score: Math.round(resp.avg_score),
                         work_type_name: resp.mem_wtn
                     });
                 }
