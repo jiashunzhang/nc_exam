@@ -30,7 +30,7 @@
             </view>
         </view>
         <view class="weui-form-preview__ft">
-            <button class="weui-form-preview__btn weui-btn_plain-primary" data-paper-id="{{ item.paper_id }}" data-paper-name="{{ item.paper_name }}" style="background-color: #3CC51F;color: #F8F8F8" bind:tap="onTryOneMoreClicked">再练一次</button><button class="weui-form-preview__btn weui-btn_plain-default" data-paper-id="{{ item.paper_id }}" data-paper-name="{{ item.paper_name }}" bind:tap="onPaperDetailClicked">查看详情</button>
+            <button class="weui-form-preview__btn weui-btn_plain-primary" data-paper-id="{{ item.paper_id }}" data-paper-name="{{ item.paper_name }}" data-test-time="{{ item.test_time }}" style="background-color: #3CC51F;color: #F8F8F8" bind:tap="onTryOneMoreClicked">再练一次</button><button class="weui-form-preview__btn weui-btn_plain-default" data-paper-id="{{ item.paper_id }}" data-paper-name="{{ item.paper_name }}" bind:tap="onPaperDetailClicked">查看详情</button>
         </view>
     </view>
 </view>

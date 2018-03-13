@@ -153,8 +153,8 @@ Page({
             url: "https://ncexam.jingjingjing.wang/registerNewUser",
             data: {
                 name: e.detail.value.username,
-                worktype: work_type_list[this.data.work_type_list_index]["id"],
-                workshop: workshop_list[this.data.workshop_list_index]["id"],
+                worktype: this.data.work_type_list[e.detail.value.worktype]["id"],
+                workshop: that.data.workshop_list[e.detail.value.department]["id"],
                 idcard: e.detail.value.idcard,
                 phonenumber: e.detail.value.phonenumber
             },
@@ -164,7 +164,23 @@ Page({
                 "Content-Type": "application/x-www-form-urlencoded"
             },
             success: function (data, statusCode, header) {
-                
+                var resp = data.data;
+                console.log(resp);
+                if(resp.errmsg != undefined && resp.errmsg != null && resp.errmsg != "") {
+                    if(resp.errmsg != "OK") {
+                        wx.showToast({
+                            title: resp.errmsg,
+                            image: "../statics/images/warning.png",
+                            duration: 3000
+                        });
+                        return;
+                    }
+                    else {
+                        wx.redirectTo({
+                            url: "../index2/index2"
+                        });
+                    }
+                }
             }
         });
     }

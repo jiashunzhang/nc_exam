@@ -6,7 +6,8 @@ Page({
    */
   data: {
     papers: [],
-    paper_type_name: ""
+    paper_type_name: "",
+    test_time: 1800000
   },
 
   /**
@@ -42,6 +43,7 @@ Page({
                   }
                   return;
               }
+              console.log(JSON.stringify(resp));
               that.setData({
                   papers: resp
               });
@@ -104,7 +106,7 @@ Page({
   },
   onTryOneMoreClicked: function(event) {
       wx.navigateTo({
-          url: '../test/test?paper_id=' + event.target.dataset.paperId + "&paper_name=" + event.target.dataset.paperName,
-      })
+          url: '../test/test?paper_id=' + event.target.dataset.paperId + "&paper_name=" + event.target.dataset.paperName + "&test_time=" + event.target.dataset.testTime,
+      });
   }
 })

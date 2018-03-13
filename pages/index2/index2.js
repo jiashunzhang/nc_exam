@@ -7,7 +7,8 @@ Page({
 data: {
     userName: "未知",
     practice_count: 0,
-    avg_score: 0
+    avg_score: 0,
+    work_type_name: ""
 },
 
   /**
@@ -30,7 +31,7 @@ data: {
                 if(resp.errmsg != undefined && resp.errmsg != null && resp.errmsg != "") {
                     if(resp.errmsg == "notloggedin")
                         wx.redirectTo({
-                            url: "../../welcome/welcome"
+                            url: "../welcome/welcome"
                         });
                     else {
                         wx.showToast({
@@ -39,7 +40,7 @@ data: {
                             duration: 3000
                         });
                         wx.redirectTo({
-                            url: "../../welcome/welcome"
+                            url: "../welcome/welcome"
                         });
                     }
                 }
@@ -47,7 +48,8 @@ data: {
                     that.setData({
                         userName: resp.mem_name,
                         practice_count: resp.tests_count,
-                        avg_score: resp.avg_score
+                        avg_score: resp.avg_score,
+                        work_type_name: resp.mem_wtn
                     });
                 }
             }
