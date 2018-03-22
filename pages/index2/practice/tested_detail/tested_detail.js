@@ -41,7 +41,10 @@ Page({
                 var obj_answers = [];
                 for (var j in arr_answers) {
                     var ans_depart = arr_answers[j].split(".");
-                    obj_answers.push({ "header": ans_depart[0], "body": ans_depart[1] });
+                    if(ans_depart.length < 2)
+                        obj_answers.push({ "body": ans_depart[0] });
+                    else
+                        obj_answers.push({ "header": ans_depart[0], "body": ans_depart[1] });
                 }
 
                 resp[i].question_answer_texts = obj_answers;

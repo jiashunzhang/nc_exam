@@ -37,7 +37,7 @@
                                 <view wx:for="{{ ques.question_answer_texts }}" wx:key="*this">
                                     <view style="display: flex;flex-direction: row;align-items: center">
                                         <text decode="{{ true }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
-                                        <radio value="{{ item.body }}" checked="{{ false }}" /><text>{{ item.header }}.</text>
+                                        <radio value="{{ item.body }}" checked="{{ false }}" />
                                         <text>{{ item.body }}</text>
                                         <text style="height: 15rpx"> </text>
                                     </view>
