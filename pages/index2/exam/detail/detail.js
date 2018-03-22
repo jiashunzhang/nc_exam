@@ -18,7 +18,7 @@ Page({
       var my_session_key = wx.getStorageSync('my_session_key');
       var that = this;
       wx.request({
-          url: "https://ncexam.jingjingjing.wang/getTestPapersByType",
+          url: "https://ncexam.jingjingjing.wang/getExamPapersByType",
           data: {
               type_id: options.papertype
           },
@@ -107,12 +107,15 @@ Page({
   },
   onPaperDetailClicked: function(event) {
       wx.navigateTo({
-          url: "../tests/tests?paper_id=" + event.target.dataset.paperId + "&paper_name=" + event.target.dataset.paperName,
+          url: '../tested_detail/tested_detail?test_id=' + event.target.dataset.testId,
       });
   },
   onTryOneMoreClicked: function(event) {
+      /*wx.navigateTo({
+          url: "../test/test?paper_id=" + event.target.dataset.paperId + "&paper_name=" + event.target.dataset.paperName + "&test_time=" + event.target.dataset.testTime,
+      });*/
       wx.navigateTo({
-          url: '../test/test?paper_id=' + event.target.dataset.paperId + "&paper_name=" + event.target.dataset.paperName + "&test_time=" + event.target.dataset.testTime,
+          url: "../ready/ready?paper_id=" + event.target.dataset.paperId + "&paper_name=" + event.target.dataset.paperName + "&test_time=" + event.target.dataset.testTime
       });
   }
 })

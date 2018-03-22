@@ -117,16 +117,16 @@ Page({
                 var resp = data.data;
                 if(resp.errmsg) {
                     if(resp.errmsg == "openidlost") {
-                        wx.showToast({
-                            title: "远端用户信息丢失",
-                            image: "../../statics/images/warning.png",
-                            duration: 3000
+                        wx.showModal({
+                            title: "异常",
+                            content: "远端用户信息丢失。",
+                            showCancel: false
                         });
                         return;
                     }
                     else if(resp.errmsg == "newuser") {
                         wx.redirectTo({
-                            url: "../../register/register"
+                            url: "../register/register"
                         });
                     }
                     else if(resp.errmsg == "OK") {

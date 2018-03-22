@@ -1,0 +1,32 @@
+<!--pages/tests/tests.wxml-->
+<view class="container" style="margin-top: 100rpx">
+    <view class="ready_info_line">
+        <view class="ready_info_line_left">
+            <text>姓名：</text>
+        </view>
+        <text style="width: 50%;text-decoration: underline">{{ mem_name }}</text>
+    </view>
+    <view class="ready_info_line">
+        <view class="ready_info_line_left">
+            <text>车间：</text>
+        </view>
+        <text style="width: 50%;text-decoration: underline">{{ workshop }}</text>
+    </view>
+    <view class="ready_info_line" style="margin-bottom: 80rpx">
+        <view class="ready_info_line_left">
+            <text>职名：</text>
+        </view>
+        <text style="width: 50%;text-decoration: underline">{{ work_type }}</text>
+    </view>
+    <text>您即将进行的考试为：</text>
+    <text style="color: red;margin-bottom: 80rpx">《{{ paper_name }}》</text>
+    <view class="ready_info_line">
+        <view class="ready_info_line_left">
+            <text>考试时间：</text>
+        </view>
+        <text style="width: 50%;margin-bottom: 50rpx">{{ test_time_text }}</text>
+    </view>
+    <button bind:tap="onStartTestClicked" data-paper-id="{{ paper_id }}" data-paper-name="{{ paper_name }}" data-test-time="{{ test_time }}" >
+        开始考试
+    </button>
+</view>

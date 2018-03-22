@@ -26,6 +26,3 @@
     padding: 0;
     box-sizing: border-box;
 }
-page {
-    background-color: #FAE5D3;
-}

@@ -1,0 +1,10 @@
+<!--pages/test/score/score.wxml-->
+<view style="width: 100%;height: 100%;display: flex;flex-direction: column;justify-content: center;align-items: center">
+    <text style="align-self: flex-start;font-size: 25rpx">用时：{{ elapsed }}</text>
+    <text>您本次得分</text>
+    <text style="font-size: 90rpx;color: {{ score >= passing_score ? 'red' : 'green' }}">{{ score }}</text>
+    <text style="font-size: 30rpx">及格分数：{{ passing_score }}</text>
+    <image wx:if="{{ score >= passing_score }}" src="../../../../../statics/images/hongbao.jpg" style="width: 200rpx;height: 200rpx;margin: 100rpx 0 100rpx 0" />
+    <text wx:else style="margin: 100rpx 0 100rpx 0">您未达到及格分数，无法获得红包。</text>
+    <button type="warn" bind:tap="onViewPaper">查看刚才的答卷</button>
+</view>

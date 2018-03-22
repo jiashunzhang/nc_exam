@@ -27,20 +27,21 @@ data: {
             method: "POST",
             success: function (data, statusCode, header) {
                 var resp = data.data;
-                console.log(JSON.stringify(resp));
                 if(resp.errmsg != undefined && resp.errmsg != null && resp.errmsg != "") {
                     if(resp.errmsg == "notloggedin")
                         wx.redirectTo({
                             url: "../welcome/welcome"
                         });
                     else {
-                        wx.showToast({
-                            title: resp.errmsg,
-                            image: "../../statics/images/warning.png",
-                            duration: 3000
-                        });
-                        wx.redirectTo({
-                            url: "../welcome/welcome"
+                        wx.showModal({
+                            title: "异常",
+                            content: resp.errmsg,
+                            showCancel: false,
+                            success: function(res) {
+                                wx.redirectTo({
+                                    url: "../welcome/welcome"
+                                });
+                            }
                         });
                     }
                 }

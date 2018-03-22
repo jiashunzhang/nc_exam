@@ -1,0 +1,25 @@
+<!--pages/tested_detail/tested_detail.wxml-->
+<view>
+    <view wx:for="{{ question_groups }}" wx:key="type_name">
+        <questions>
+            <view slot="type_name">{{ item.type_name }}</view>
+            <view slot="questions">
+                <view wx:for="{{ item.detail }}" wx:key="*this" style="display: flex;flex-direction: column" wx:for-item="ques">
+                    <view style="background-color: {{ ques.question_right_answers == ques.answers ? '#CCFFCC' : '#FFCCCC' }}">
+                        <text decode="{{ true }}">&nbsp;&nbsp;&nbsp;&nbsp;{{ index + 1 }}. {{ ques.question_title }}</text>
+                        <view wx:for="{{ ques.question_answer_texts }}" wx:key="*this">
+                            <view style="display: flex;flex-direction: row;align-items: center">
+                                <text decode="{{ true }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
+                                <text>{{  item.header }}.</text>
+                                <text>{{ item.body }}</text>
+                                <text style="height: 15rpx"> </text>
+                            </view>
+                        </view>
+                        <view><text decode="{{ true }}" style="font-size: 22rpx">&nbsp;&nbsp;&nbsp;&nbsp;正确答案：{{ ques.question_right_answers }}</text><text wx:if="{{ ques.question_right_answers != ques.answers }}" style="font-size: 22rpx" decode="{{ true }}">&nbsp;&nbsp;&nbsp;&nbsp;您的答案：{{ ques.answers }}</text></view>
+                    </view>
+                    <text style="height: 10rpx"> </text>
+                </view>
+            </view>
+        </questions>
+    </view>
+</view>

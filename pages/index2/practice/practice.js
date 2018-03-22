@@ -4,17 +4,10 @@ const app = getApp();
 
 Page({
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     examCatalogList: []
-  },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    });
   },
   onLoad: function () {
     if (app.globalData.userInfo) {
@@ -48,25 +41,28 @@ Page({
     var that = this;
     wx.request({
         url: "https://ncexam.jingjingjing.wang/getMyPaperTypes",
-        data: {},
+        data: {
+            if_exam: "0"
+        },
         header: {
-            "Cookie": my_session_key
+            "Cookie": my_session_key,
+            "Content-Type": "application/x-www-form-urlencoded"
         },
         method: "POST",
         success: function (data, statusCode, header) {
             var resp = data.data;
             if(resp.errmsg) {
                 if(resp.errmsg == "notloggedin")
-                    wx.showToast({
-                        title: "请重新登录。",
-                        image: "../../statics/images/warning.png",
-                        duration: 2000
+                    wx.showModal({
+                        title: "异常",
+                        content: "请重新登录。",
+                        showCancel: false
                     });
                 else {
-                    wx.showToast({
-                        title: resp.errmsg,
-                        image: "../../statics/images/warning.png",
-                        duration: 3000
+                    wx.showModal({
+                        title: "异常",
+                        content: resp.errmsg,
+                        showCancel: false
                     });
                 }
                 return;

@@ -37,7 +37,6 @@ Page({
           window_width: res.windowWidth + "px",
           qmv_hidden: true
       });
-      console.log(this.data.window_width);
       wx.request({
           url: "https://ncexam.jingjingjing.wang/getRandomTest",
           data: {
@@ -298,7 +297,7 @@ function handinPaper(that, paper_detail, my_session_key) {
         url: "https://ncexam.jingjingjing.wang/handin",
         data: {
             paper_id: that.data.paper_id,
-            if_exam: 0,
+            if_exam: 1,
             paper_detail: JSON.stringify(paper_detail)
         },
         method: "POST",
@@ -308,14 +307,15 @@ function handinPaper(that, paper_detail, my_session_key) {
         },
         success: function (data, statusCode, header) {
             var resp = data.data;
-            console.log(JSON.stringify(resp));
-            if (resp.errmsg != undefined && resp.errmsg != null && resp.errmsg != "OK") {
-                wx.showModal({
-                    title: "异常",
-                    content: resp.errmsg,
-                    showCancel: false
-                });
-                return;
+            if (resp.errmsg != undefined && resp.errmsg != null) {
+                if(resp.errmsg != "OK") {
+                    wx.showModal({
+                        title: "异常",
+                        content: resp.errmsg,
+                        showCancel: false
+                    });
+                    return;
+                }
             }
             else {
                 wx.showModal({

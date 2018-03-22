@@ -1,0 +1,13 @@
+/* pages/tests/tests.wxss */
+.ready_info_line {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+.ready_info_line_left {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 50%;
+}

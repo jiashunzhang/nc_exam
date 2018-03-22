@@ -1,4 +1,1 @@
 /* pages/tests/tests.wxss */
-page {
-    background-color: #F5EEF8;
-}

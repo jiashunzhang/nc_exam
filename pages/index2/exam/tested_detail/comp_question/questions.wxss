@@ -1,0 +1,6 @@
+/* pages/tested_detail/comp_question/questions.wxss */
+.wrapper
+{
+    display: flex;
+    flex-direction: column;
+}

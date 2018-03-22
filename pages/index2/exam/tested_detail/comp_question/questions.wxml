@@ -1,0 +1,5 @@
+<!--pages/tested_detail/comp_question/questions.wxml-->
+<view class="wrapper">
+    <slot name="type_name"></slot>
+    <slot name="questions"></slot>
+</view>

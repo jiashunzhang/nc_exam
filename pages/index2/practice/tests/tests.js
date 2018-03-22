@@ -28,16 +28,16 @@ Page({
             var resp = data.data;
             if (resp.errmsg) {
               if (resp.errmsg == "notloggedin")
-                wx.showToast({
-                  title: "请重新登录。",
-                  image: "../../statics/images/warning.png",
-                  duration: 2000
+                wx.showModal({
+                    title: "异常",
+                    content: "请重新登录。",
+                    showCancel: false
                 });
               else {
-                wx.showToast({
-                  title: resp.errmsg,
-                  image: "../../statics/images/warning.png",
-                  duration: 3000
+                wx.showModal({
+                    title: "异常",
+                    content: resp.errmsg,
+                    showCancel: false
                 });
               }
               return;
