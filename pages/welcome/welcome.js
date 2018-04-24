@@ -143,6 +143,13 @@ Page({
                         return;
                     }
                 }
+            },
+            fail: function() {
+                wx.showModal({
+                    title: "异常",
+                    content: "请求失败。",
+                    showCancel: false
+                });
             }
         });
     },

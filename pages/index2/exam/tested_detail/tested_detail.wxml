@@ -10,7 +10,7 @@
                         <view wx:for="{{ ques.question_answer_texts }}" wx:key="*this">
                             <view style="display: flex;flex-direction: row;align-items: center">
                                 <text decode="{{ true }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
-                                <text>{{  item.header }}.</text>
+                                <text wx:if="{{ item.header }}">{{ item.header }}.</text>
                                 <text>{{ item.body }}</text>
                                 <text style="height: 15rpx"> </text>
                             </view>

@@ -15,7 +15,8 @@
         "pages/index2/exam/ready/ready",
         "pages/index2/exam/tested_detail/tested_detail",
         "pages/index2/exam/test/test",
-        "pages/index2/exam/test/score/score"
+        "pages/index2/exam/test/score/score",
+        "pages/index2/wrongs/wrongs"
     ],
     "window": {
         "backgroundTextStyle": "light",
