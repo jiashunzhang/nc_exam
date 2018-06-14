@@ -11,7 +11,9 @@ Page({
         userInfo: {},
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
-        curYear: (new Date()).getFullYear()
+        curYear: (new Date()).getFullYear(),
+        privateUserInfo: null,
+        getUserLoopCount: 0
     },
 
   /**
@@ -32,8 +34,6 @@ Page({
                     hasUserInfo: true
                 });
             }
-
-            console.log(app.globalData);
         } else {
             // 在没有 open-type=getUserInfo 版本的兼容处理
             wx.getUserInfo({
@@ -44,6 +44,14 @@ Page({
                         hasUserInfo: true
                     });
                 }
+            });
+        }
+
+        if(!app.globalData.privateUserInfo) {
+            this.getPrivateUserInfoLoop();
+        } else {
+            this.setData({
+                privateUserInfo: app.globalData.privateUserInfo
             });
         }
 
@@ -157,5 +165,18 @@ Page({
         wx.navigateTo({
             url: "../register/register"
         });
+    },
+    getPrivateUserInfoLoop: function() {
+        this.setData({
+            getUserLoopCount: this.data.getUserLoopCount + 1
+        });
+
+        if(!app.globalData.privateUserInfo && this.data.getUserLoopCount < 100) {
+            setTimeout(this.getPrivateUserInfoLoop, 500);
+        } else {
+            this.setData({
+                privateUserInfo: app.globalData.privateUserInfo
+            });
+        }
     }
 })

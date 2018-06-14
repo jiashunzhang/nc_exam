@@ -1,9 +1,12 @@
+page {
+    height: 100%;
+}
 .box2{
     margin: 20rpx auto;
     width: 85%;
     min-height: 135rpx;
     padding: 10rpx;
-    position:relative;
+    position: relative;
     background: -webkit-gradient(linear, 0% 20%, 0% 92%, from(#f3f3f3), to(#fff), color-stop(.1,#f3f3f3));
     background: linear-gradient(to bottom, #F3F3F3 20%, #FFF 92%);
     border-top: 1rpx solid #ccc;
@@ -48,6 +51,7 @@
 }
 .dilate {
     color: red;
+    font-size: 25rpx;
     text-shadow: 0 0 1rpx currentColor, -1rpx -1rpx 1rpx #300, 0 -1rpx 1rpx #300, 1rpx -1rpx 1rpx #300, 1rpx 0 1rpx #300, 1rpx 1rpx 1rpx #300, 0 1rpx 1rpx #300, -1rpx 1rpx 1rpx #300, -1rpx 0 1rpx #300
 }
 .distant-top {

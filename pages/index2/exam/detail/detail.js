@@ -114,7 +114,7 @@ Page({
       /*wx.navigateTo({
           url: "../test/test?paper_id=" + event.target.dataset.paperId + "&paper_name=" + event.target.dataset.paperName + "&test_time=" + event.target.dataset.testTime,
       });*/
-      wx.navigateTo({
+      wx.redirectTo({
           url: "../ready/ready?paper_id=" + event.target.dataset.paperId + "&paper_name=" + event.target.dataset.paperName + "&test_time=" + event.target.dataset.testTime
       });
   }

@@ -5,6 +5,8 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
+    var privateUserInfo = null;
+    var that = this;
 
     // 登录
     wx.login({
@@ -19,21 +21,8 @@ App({
                     "content-type": "application/json"
                 },
                 success: function (data, statusCode, header) {
-                    console.log(JSON.stringify(data.data));
-                    if(data.data.errmsg) {
-                        /*if(data.data.errmsg == "nosuchmember")
-                        {
-                            wx.showModal({
-                                title: '异常',
-                                content: '该用户尚未注册。',
-                                success: function(res) {
-                                    wx.redirectTo({
-                                        url: "../register/register"
-                                    });
-                                }
-                            });
-                        }
-                        else */if(data.data.errmsg == "notverified")
+                    //console.log(JSON.stringify(data.data));
+                    if(data.data.errmsg) {if(data.data.errmsg == "notverified")
                             wx.showModal({
                                 title: '异常',
                                 content: '用户尚未通过管理员审核，请等待审核。',
@@ -62,13 +51,13 @@ App({
                         var msk = data.data.my_session_key;
                         if(msk)
                             wx.setStorageSync("my_session_key", "sessionid=" + msk);
+                        that.globalData.privateUserInfo = data.data;
                     }
                 }
             });
         }
     });
     // 获取用户信息
-    var that = this;
     wx.getSetting({
         success: res => {
             if (res.authSetting['scope.userInfo']) {
@@ -85,7 +74,7 @@ App({
                         }
                     }
                 });
-            } else {
+            }/* else {
                 wx.authorize({
                     scope: 'scope.userInfo',
                     success() {
@@ -103,12 +92,13 @@ App({
                         });
                     }
                 });
-            }
+            }*/
             //console.log(JSON.stringify(res));
         }
     });
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    privateUserInfo: null
   }
 })
