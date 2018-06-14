@@ -8,7 +8,9 @@ data: {
     userName: "未知",
     practice_count: 0,
     avg_score: 0,
-    work_type_name: ""
+    work_type_name: "未知",
+    pos_name: "未知",
+    workshop_name: "未知"
 },
 
   /**
@@ -50,7 +52,9 @@ data: {
                         userName: resp.mem_name,
                         practice_count: resp.tests_count,
                         avg_score: Math.round(resp.avg_score),
-                        work_type_name: resp.mem_wtn
+                        work_type_name: resp.mem_wtn,
+                        workshop_name: resp.mem_dep,
+                        pos_name: resp.mem_pos
                     });
                 }
             }
