@@ -1,30 +1,44 @@
-<!--index.wxml-->
-<!--<view class="container" style="border-style: solid;border-color: red;border-width: 1rpx">-->
+<!--pages/papers/papers.wxml-->
 <view class="container">
-    <!--<view class="search_container">
-        <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">登录</button>
-        <image wx:else bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-        <input type="text" placeholder="搜索" style="border-color: silver;border-style: solid;border-width: 1rpx;border-radius: 25rpx;font-size: 30rpx;flex-grow: 1"></input>
-        <image style="width: 55rpx;height: 55rpx" src="../../statics/images/search.png"></image>
-        
-    </view>-->
-    <view style="width: 100%;display: flex;flex-direction: column;justify-content: center"><text style="text-align: center;font-size: 25rpx">—— ◆ 试卷分类 ◆ ——</text></view>
-    <view class="weui-form-preview" wx:for="{{ examCatalogList }}" wx:key="{{ index }}" style="margin-bottom: 20rpx;width: 100%;">
+    <view style="width: 100%;display: flex;flex-direction: column;justify-content: center"><text style="text-align: center;font-size:25rpx">—— ◆ 未考试卷汇总 ◆ ——</text></view>
+    <view wx:if="{{ paper.length == 0 }}" style="display: flex; flex-direction: column; justify-content: center; align-items: center">        <image src="../../../statics/images/自习.png" style="width: 250rpx; height: 250rpx"></image>
+        <view style="color: red">您已经完成了全部考试。</view>
+    </view>
+    <view class="weui-form-preview" wx:for="{{ papers }}" wx:key="{{ index }}" style="margin-bottom: 20rpx;width: 100%;">
         <view class="weui-form-preview__hd">
             <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">{{ item.type_name }}考试</view>
+                <view class="weui-form-preview__label" style="font-size: 25rpx">{{ item.paper_name }}</view>
             </view>
         </view>
         <view class="weui-form-preview__bd">
             <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">共答</view>
-                <view class="weui-form-preivew__value">{{ item.paper_count }}套试卷。</view>
-                <view class="weui-form-preview__label">最高分数</view>
-                <view class="weui-form-preview__value">{{ item.max_score }}分。</view>
+                <view class="weui-form-preview__label">及格分数</view>
+                <view class="weui-form-preview__value">{{ item.passing_score }}分</view>
+            </view>
+            <view class="weui-form-preview__item">
+                <view class="weui-form-preview__label">考试时间</view>
+                <view class="weui-form-preview__value" >{{ item.exam_time }}</view>
+            </view>
+            <view class="weui-form-preview__item">
+                <view class="weui-form-preview__label">单选</view>
+                <view class="weui-form-preview__value">{{ item.ss_count }}道</view>
+            </view>
+            <view class="weui-form-preview__item">
+                <view class="weui-form-preview__label">多选</view>
+                <view class="weui-form-preview__value">{{ item.ms_count }}道</view>
+            </view>
+            <view class="weui-form-preview__item">
+                <view class="weui-form-preview__label">判断</view>
+                <view class="weui-form-preview__value">{{ item.jm_count }}道</view>
+            </view>
+            <view class="weui-form-preview__item">
+                <view class="weui-form-preview__label">出题日期</view>
+                <view class="weui-form-preview__value">{{ item.set_date }}</view>
             </view>
         </view>
-        <view class="weui-form-preview__bd">
-            <button class="weui-form-preview__btn" data-type-id="{{ item.type_id }}" data-type-name="{{ item.type_name }}" bind:tap="onPaperTypeClicked">查看详情</button>
+        <view class="weui-form-preview__ft">
+            <button class="weui-form-preview__btn weui-btn_plain-primary" data-exam-paper-id="{{ item.exam_paper_id }}" data-test-time="{{ item.test_time }}" data-paper-name="{{ item.paper_name }}" style="background-color: #3CC51F;color: #F8F8F8" bind:tap="onTryOneMoreClicked">进行考试</button>
+            <!--<button wx:else class="weui-form-preview__btn weui-btn_plain-default" data-test-id="{{ item.test_paper_id }}" data-paper-name="{{ item.paper_name }}" bind:tap="onPaperDetailClicked">查看答题情况</button>-->
         </view>
     </view>
 </view>

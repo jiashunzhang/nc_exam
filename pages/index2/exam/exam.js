@@ -1,84 +1,73 @@
-// pages/index2/exam/exam.js
-const app = getApp();
+// pages/papers/papers.js
 Page({
 
   /**
    * 页面的初始数据
    */
-    data: {
-        userInfo: {},
-        hasUserInfo: false,
-        canIUse: wx.canIUse('button.open-type.getUserInfo'),
-        examCatalogList: []
-    },
+  data: {
+    papers: []
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
-    onLoad: function (options) {
-        if (app.globalData.userInfo) {
-            this.setData({
-                userInfo: app.globalData.userInfo,
-                hasUserInfo: true
-            });
-        } else if (this.data.canIUse) {
-            // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-            // 所以此处加入 callback 以防止这种情况
-            app.userInfoReadyCallback = res => {
-                this.setData({
-                    userInfo: res.userInfo,
-                    hasUserInfo: true
-                });
-            }
-        } else {
-            // 在没有 open-type=getUserInfo 版本的兼容处理
-            wx.getUserInfo({
-                success: res => {
-                    app.globalData.userInfo = res.userInfo;
-                    this.setData({
-                        userInfo: res.userInfo,
-                        hasUserInfo: true
+  onLoad: function (options) {
+      this.setData({ paper_type_name: options.typename });
+      var my_session_key = wx.getStorageSync('my_session_key');
+      var that = this;
+      wx.request({
+          url: "https://ncexam.jingjingjing.wang/getExamPapers",
+          data: {
+              done: "0"
+          },
+          header: {
+              "Cookie": my_session_key,
+              "content-type": "application/x-www-form-urlencoded"
+          },
+          method: "POST",
+          success: function (data, statusCode, header) {
+              var resp = data.data;
+              if (resp.errmsg) {
+                  if (resp.errmsg == "notloggedin")
+                      wx.showToast({
+                          title: "请重新登录。",
+                          image: "../../statics/images/warning.png",
+                          duration: 2000
+                      });
+                  else {
+                      wx.showModal({
+                          title: "异常",
+                          content: resp.errmsg,
+                          showCancel: false
+                      });
+                  }
+                  return;
+              }
+              /*if(resp.length == 0) {
+                  that.setData({
+
+                  });
+              }*/
+                var ret = [];
+                for(var i in resp) {
+                    ret.push({
+                        passing_score: resp[i].passing_score,
+                        exam_time: time_format(parseInt(resp[i].exam_time)),
+                        exam_paper_id: resp[i].exam_paper_id,
+                        paper_name: resp[i].paper_name,
+                        set_date: resp[i].set_date,
+                        ss_count: resp[i].ss_count,
+                        ms_count: resp[i],ms_count,
+                        jm_count: resp[i].jm_count
                     });
                 }
-            });
-        }
 
-        var my_session_key = wx.getStorageSync('my_session_key');
-        var that = this;
-        wx.request({
-            url: "https://ncexam.jingjingjing.wang/getMyPaperTypes",
-            data: {
-                if_exam: "1"
-            },
-            header: {
-                "Cookie": my_session_key,
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            method: "POST",
-            success: function (data, statusCode, header) {
-                var resp = data.data;
-                if (resp.errmsg) {
-                    if (resp.errmsg == "notloggedin")
-                        wx.showToast({
-                            title: "请重新登录。",
-                            image: "../../../statics/images/warning.png",
-                            duration: 2000
-                        });
-                    else {
-                        wx.showModal({
-                            title: "异常",
-                            content: resp.errmsg,
-                            showCancel: false
-                        });
-                    }
-                    return;
-                }
-                that.setData({
-                    examCatalogList: resp
-                });
-            }
-        });
-    },
+              that.setData({
+                  papers: ret
+              });
+          }
+      });
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -91,7 +80,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    
   },
 
   /**
@@ -128,17 +117,34 @@ Page({
   onShareAppMessage: function () {
   
   },
-    onPaperTypeClicked: function (event) {
-        wx.navigateTo({
-            url: "./detail/detail?papertype=" + event.target.dataset.typeId + "&typename=" + event.target.dataset.typeName
-        });
-    },
-    getUserInfo: function (e) {
-        console.log(e);
-        app.globalData.userInfo = e.detail.userInfo;
-        this.setData({
-            userInfo: e.detail.userInfo,
-            hasUserInfo: true
-        });
-    }
+  onPaperDetailClicked: function(event) {
+      wx.navigateTo({
+          url: '../tested_detail/tested_detail?test_id=' + event.target.dataset.testId,
+      });
+  },
+  onTryOneMoreClicked: function(event) {
+      /*wx.navigateTo({
+          url: "../test/test?paper_id=" + event.target.dataset.paperId + "&paper_name=" + event.target.dataset.paperName + "&test_time=" + event.target.dataset.testTime,
+      });*/
+      wx.redirectTo({
+          url: "./ready/ready?exam_paper_id=" + event.target.dataset.examPaperId + "&paper_name=" + event.target.dataset.paperName + "&test_time=" + event.target.dataset.testTime
+      });
+  }
 })
+function time_format(micro_second) {
+  // 秒数
+  var second = Math.floor(micro_second / 1000);
+  // 小时位
+  var hr = fill_zero_prefix(Math.floor(second / 3600));
+  // 分钟位
+  var min = fill_zero_prefix(Math.floor((second - hr * 3600) / 60));
+  // 秒位
+  var sec = fill_zero_prefix((second - hr * 3600 - min * 60));// equal to => var sec = second % 60;
+  // 毫秒位，保留2位
+  //var micro_sec = fill_zero_prefix(Math.floor((micro_second % 1000) / 10));
+  return hr + ":" + min + ":" + sec
+}
+// 位数不足补零
+function fill_zero_prefix(num) {
+  return num < 10 ? "0" + num : num
+}

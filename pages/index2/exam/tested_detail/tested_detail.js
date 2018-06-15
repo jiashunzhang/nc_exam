@@ -15,9 +15,9 @@ Page({
     var that = this;
     var my_session_key = wx.getStorageSync('my_session_key');
     wx.request({
-      url: "https://ncexam.jingjingjing.wang/getTestDetail",
+      url: "https://ncexam.jingjingjing.wang/getExamDetail",
       data: {
-        test_paper_id: options.test_id
+        exam_paper_id: options.exam_paper_id
       },
       header: {
         "Cookie": my_session_key,

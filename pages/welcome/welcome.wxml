@@ -12,6 +12,6 @@
         <view>工种：{{ privateUserInfo.mem_wt }}</view>
         <view>职名：{{ privateUserInfo.mem_pos }}</view>
     </view>
-    <button wx:if="{{ !rejectlogin }}" open-type="getUserInfo" type="primary" style="margin: 15rpx" bind:tap="onCurrentUserLogin">使用当前用户使用</button><button type="default" bind:tap="onOtherUserLogin">使用其他用户登录</button>
+    <button wx:if="{{ !rejectlogin }}" open-type="getUserInfo" type="primary" style="margin: 15rpx" bind:tap="onCurrentUserLogin">使用当前用户使用</button><button type="default" bind:tap="onOtherUserLogin" disabled="true">使用其他用户登录</button>
     <text style="position: absolute;bottom: 0;font-size: 25rpx;color: white">南仓站信息化车间©{{ curYear }}</text>
 </view>

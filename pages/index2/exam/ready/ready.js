@@ -7,7 +7,7 @@ Page({
   data: {
       mem_name: "",
       workshop: "",
-      paper_id: "",
+      exam_paper_id: "",
       paper_name: "",
       test_time: 1800000,
       test_time_text: "00:30:00",
@@ -38,7 +38,7 @@ Page({
                 return;
             } else
                 that.setData({
-                    paper_id: options.paper_id,
+                    exam_paper_id: options.exam_paper_id,
                     paper_name: options.paper_name,
                     test_time_text: time_format(options.test_time),
                     test_time: options.test_time,
@@ -100,7 +100,7 @@ Page({
   },
   onStartTestClicked: function(event) {
     wx.redirectTo({
-        url: "../test/test?paper_id=" + event.target.dataset.paperId + "&paper_name=" + event.target.dataset.paperName + "&test_time=" + event.target.dataset.testTime
+        url: "../test/test?exam_paper_id=" + event.target.dataset.examPaperId + "&paper_name=" + event.target.dataset.paperName + "&test_time=" + event.target.dataset.testTime
     });
   }
 });

@@ -16,9 +16,9 @@ Page({
    */
     onLoad: function (options) {
         this.setData({
-            score: Math.round(options.score),
+            score: Math.floor(options.score),
             passing_score: Math.round(options.passing_score),
-            test_paper_id: options.test_paper_id,
+            exam_paper_id: options.exam_paper_id,
             elapsed: options.elapsed
         });
     },
@@ -73,7 +73,7 @@ Page({
   },
     onViewPaper: function(event) {
         wx.redirectTo({
-            url: "../../tested_detail/tested_detail?test_id=" + this.data.test_paper_id
+            url: "../../tested_detail/tested_detail?exam_paper_id=" + this.data.exam_paper_id
         });
     }
 })

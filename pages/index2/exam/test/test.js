@@ -13,7 +13,7 @@ Page({
         question_groups: null,
         done: {},
         done_count: 0,
-        paper_id: null,
+        exam_paper_id: null,
         to_view: "view-00",
         q_cata_index: ["一、", "二、", "三、"],
         question_micro_view: {},
@@ -32,15 +32,15 @@ Page({
 
       this.setData({
           count_down_seconds: parseInt(options.test_time),
-          paper_id: options.paper_id,
+          exam_paper_id: options.exam_paper_id,
           window_height: res.windowHeight + "px",
           window_width: res.windowWidth + "px",
           qmv_hidden: true
       });
       wx.request({
-          url: "https://ncexam.jingjingjing.wang/getRandomTest",
+          url: "https://ncexam.jingjingjing.wang/getRandomExam",
           data: {
-            paper_id: options.paper_id
+            exam_paper_id: options.exam_paper_id
           },
           header: {
               "Cookie": my_session_key,
@@ -294,10 +294,9 @@ function handinPaper(that, paper_detail, my_session_key) {
     console.log(JSON.stringify(paper_detail));
 
     wx.request({
-        url: "https://ncexam.jingjingjing.wang/handin",
+        url: "https://ncexam.jingjingjing.wang/handinExam",
         data: {
-            paper_id: that.data.paper_id,
-            if_exam: 1,
+            exam_paper_id: that.data.exam_paper_id,
             paper_detail: JSON.stringify(paper_detail)
         },
         method: "POST",
@@ -325,7 +324,7 @@ function handinPaper(that, paper_detail, my_session_key) {
                 });
             }
             wx.redirectTo({
-                url: "./score/score?score=" + resp.score + "&passing_score=" + resp.passing_score + "&test_paper_id=" + resp.test_paper_id + "&elapsed=" + that.data.count_time
+                url: "./score/score?score=" + resp.score + "&passing_score=" + resp.passing_score + "&exam_paper_id=" + that.data.exam_paper_id + "&elapsed=" + that.data.count_time
             });
         }
     });

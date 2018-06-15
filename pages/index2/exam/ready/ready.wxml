@@ -26,7 +26,7 @@
         </view>
         <text style="width: 50%;margin-bottom: 50rpx">{{ test_time_text }}</text>
     </view>
-    <button bind:tap="onStartTestClicked" data-paper-id="{{ paper_id }}" data-paper-name="{{ paper_name }}" data-test-time="{{ test_time }}" >
+    <button bind:tap="onStartTestClicked" data-exam-paper-id="{{ exam_paper_id }}" data-paper-name="{{ paper_name }}" data-test-time="{{ test_time }}" >
         开始考试
     </button>
 </view>

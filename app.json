@@ -11,12 +11,12 @@
         "pages/index2/practice/test/test",
         "pages/index2/practice/test/score/score",
         "pages/index2/exam/exam",
-        "pages/index2/exam/detail/detail",
         "pages/index2/exam/ready/ready",
         "pages/index2/exam/tested_detail/tested_detail",
         "pages/index2/exam/test/test",
         "pages/index2/exam/test/score/score",
-        "pages/index2/wrongs/wrongs"
+        "pages/index2/wrongs/wrongs",
+        "pages/index2/examinfo/examinfo"
     ],
     "window": {
         "backgroundTextStyle": "light",
