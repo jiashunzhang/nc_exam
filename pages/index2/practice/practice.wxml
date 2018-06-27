@@ -17,8 +17,8 @@
         </view>
         <view class="weui-form-preview__bd">
             <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">共</view>
-                <view class="weui-form-preivew__value">{{ item.paper_count }}套习题。</view>
+                <view class="weui-form-preview__label">共进行了</view>
+                <view class="weui-form-preivew__value">{{ item.paper_count }}次练习。</view>
                 <view class="weui-form-preview__label">最高分数</view>
                 <view class="weui-form-preview__value">{{ item.max_score }}分。</view>
             </view>

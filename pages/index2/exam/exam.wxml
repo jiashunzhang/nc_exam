@@ -1,7 +1,7 @@
 <!--pages/papers/papers.wxml-->
 <view class="container">
     <view style="width: 100%;display: flex;flex-direction: column;justify-content: center"><text style="text-align: center;font-size:25rpx">—— ◆ 未考试卷汇总 ◆ ——</text></view>
-    <view wx:if="{{ paper.length == 0 }}" style="display: flex; flex-direction: column; justify-content: center; align-items: center">        <image src="../../../statics/images/自习.png" style="width: 250rpx; height: 250rpx"></image>
+    <view wx:if="{{ papers.length == 0 }}" style="display: flex; flex-direction: column; justify-content: center; align-items: center">        <image src="../../../statics/images/自习.png" style="width: 250rpx; height: 250rpx"></image>
         <view style="color: red">您已经完成了全部考试。</view>
     </view>
     <view class="weui-form-preview" wx:for="{{ papers }}" wx:key="{{ index }}" style="margin-bottom: 20rpx;width: 100%;">
