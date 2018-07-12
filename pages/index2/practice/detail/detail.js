@@ -111,7 +111,7 @@ Page({
       });
   },
   onTryOneMoreClicked: function(event) {
-      wx.navigateTo({
+      wx.redirectTo({
           url: '../test/test?paper_id=' + event.target.dataset.paperId + "&paper_name=" + event.target.dataset.paperName + "&test_time=" + event.target.dataset.testTime,
       });
   }

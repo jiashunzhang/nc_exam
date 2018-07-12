@@ -57,6 +57,19 @@ Page({
                   });
                   return;
               } else {
+                  if(resp.length <= 0) {
+                      wx.showModal({
+                          title: "注意",
+                          content: "题库中无试题，请联系教育科添加试题。",
+                          showCancel:false,
+                          success: function(res) {
+                              wx.redirectTo({
+                                  url: "../exam"
+                              });
+                          }
+                      });
+                      
+                  }
                   var q_groups = [];
                   var q_micro_view = {};
                   
@@ -314,18 +327,12 @@ function handinPaper(that, paper_detail, my_session_key) {
                         showCancel: false
                     });
                     return;
+                } else {
+                    wx.redirectTo({
+                        url: "./score/score?score=" + resp.score + "&passing_score=" + resp.passing_score + "&exam_paper_id=" + that.data.exam_paper_id + "&elapsed=" + that.data.count_time
+                    });
                 }
             }
-            else {
-                wx.showModal({
-                    title: "异常",
-                    content: "服务嚣未返回数据。",
-                    showCancel: false
-                });
-            }
-            wx.redirectTo({
-                url: "./score/score?score=" + resp.score + "&passing_score=" + resp.passing_score + "&exam_paper_id=" + that.data.exam_paper_id + "&elapsed=" + that.data.count_time
-            });
         }
     });
 }

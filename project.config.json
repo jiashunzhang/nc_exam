@@ -8,7 +8,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.91",
+	"libVersion": "2.1.1",
 	"appid": "wx501a9548599c0c65",
 	"projectname": "nc_exam",
 	"condition": {

@@ -17,7 +17,7 @@
             </view>
             <view class="weui-form-preview__item">
                 <view class="weui-form-preview__label">考试时间</view>
-                <view class="weui-form-preview__value" >{{ item.exam_time }}</view>
+                <view class="weui-form-preview__value" >{{ item.exam_time_text }}</view>
             </view>
             <view class="weui-form-preview__item">
                 <view class="weui-form-preview__label">单选</view>
@@ -37,7 +37,7 @@
             </view>
         </view>
         <view class="weui-form-preview__ft">
-            <button class="weui-form-preview__btn weui-btn_plain-primary" data-exam-paper-id="{{ item.exam_paper_id }}" data-test-time="{{ item.test_time }}" data-paper-name="{{ item.paper_name }}" style="background-color: #3CC51F;color: #F8F8F8" bind:tap="onTryOneMoreClicked">进行考试</button>
+            <button class="weui-form-preview__btn weui-btn_plain-primary" data-exam-paper-id="{{ item.exam_paper_id }}" data-test-time="{{ item.exam_time }}" data-paper-name="{{ item.paper_name }}" style="background-color: #3CC51F;color: #F8F8F8" bind:tap="onTryOneMoreClicked">进行考试</button>
             <!--<button wx:else class="weui-form-preview__btn weui-btn_plain-default" data-test-id="{{ item.test_paper_id }}" data-paper-name="{{ item.paper_name }}" bind:tap="onPaperDetailClicked">查看答题情况</button>-->
         </view>
     </view>

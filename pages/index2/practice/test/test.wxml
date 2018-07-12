@@ -1,4 +1,4 @@
-<scroll-view style="height: {{ window_height }};margin-bottom: 55rpx" scroll-y="true" scroll-with-animation="true" scroll-into-view="{{ to_view }}">
+<scroll-view style="height: {{ window_height }}" scroll-y="true" scroll-with-animation="true" scroll-into-view="{{ to_view }}">
     <form bind:submit="onHandin">
         <view wx:for="{{ question_groups }}" wx:key="type_name">
             <questions>
@@ -80,4 +80,5 @@
             </view>
         </view>
     </form>
+    <view style="height: 55rpx"> </view>
 </scroll-view>

@@ -51,12 +51,13 @@ Page({
                 for(var i in resp) {
                     ret.push({
                         passing_score: resp[i].passing_score,
-                        exam_time: time_format(parseInt(resp[i].exam_time)),
+                        exam_time_text: time_format(parseInt(resp[i].exam_time)),
+                        exam_time: parseInt(resp[i].exam_time),
                         exam_paper_id: resp[i].exam_paper_id,
                         paper_name: resp[i].paper_name,
                         set_date: resp[i].set_date,
                         ss_count: resp[i].ss_count,
-                        ms_count: resp[i],ms_count,
+                        ms_count: resp[i].ms_count,
                         jm_count: resp[i].jm_count
                     });
                 }

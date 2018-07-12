@@ -16,7 +16,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      var that = this;
+      /*var that = this;
       wx.request({
           url: "https://ncexam.jingjingjing.wang/getWorkTypeList",
           success: function (data, statusCode, header) {
@@ -50,7 +50,7 @@ Page({
                   workshop_list: resp.workshops,
               });
           }
-      });
+      });*/
   },
 
   /**
@@ -148,13 +148,10 @@ Page({
         });
 
         var that = this;
-        var my_session_key = wx.getStorageSync('my_session_key');
+        var my_session_key = wx.getStorageSync("my_session_key");
         wx.request({
             url: "https://ncexam.jingjingjing.wang/registerNewUser",
             data: {
-                /*name: e.detail.value.username,
-                worktype: this.data.work_type_list[e.detail.value.worktype]["id"],
-                workshop: that.data.workshop_list[e.detail.value.department]["id"],*/
                 idcard: e.detail.value.idcard,
                 phonenumber: e.detail.value.phonenumber
             },
@@ -165,18 +162,17 @@ Page({
             },
             success: function (data, statusCode, header) {
                 var resp = data.data;
-                console.log(resp);
                 if(resp.errmsg != undefined && resp.errmsg != null && resp.errmsg != "") {
                     if(resp.errmsg != "OK") {
                         wx.showModal({
-                            title: "警告",
+                            title: "异常",
                             content: resp.errmsg,
                             showCancel: false
                         });
                         return;
                     }
                     else {
-                        wx.redirectTo({
+                        wx.navigateTo({
                             url: "../index2/index2"
                         });
                     }

@@ -2,7 +2,7 @@
 <view>
     <view wx:for="{{ question_groups }}" wx:key="type_name">
         <questions>
-            <view slot="type_name">{{ item.type_name }}</view>
+            <view slot="type_name">{{ q_type_num_map[item.type_name] }}、{{ item.type_name }}</view>
             <view slot="questions">
                 <view wx:for="{{ item.detail }}" wx:key="*this" style="display: flex;flex-direction: column" wx:for-item="ques">
                     <view style="background-color: {{ ques.question_right_answers == ques.answers ? '#CCFFCC' : '#FFCCCC' }}">

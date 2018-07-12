@@ -9,6 +9,7 @@ App({
     var that = this;
 
     // 登录
+    wx.clearStorageSync();
     wx.login({
         success: res => {
             // 发送 res.code 到后台换取 openId, sessionKey, unionId
@@ -21,8 +22,8 @@ App({
                     "content-type": "application/json"
                 },
                 success: function (data, statusCode, header) {
-                    //console.log(JSON.stringify(data.data));
-                    if(data.data.errmsg) {if(data.data.errmsg == "notverified")
+                    if(data.data.errmsg) {
+                        if(data.data.errmsg == "notverified")
                             wx.showModal({
                                 title: '异常',
                                 content: '用户尚未通过管理员审核，请等待审核。',
@@ -42,15 +43,42 @@ App({
                                     });
                                 }
                             });
+                        else if(data.data.errmsg == "nosuchmember") {
+                            if(!data.data.my_session_key) {
+                                wx.showModal({
+                                    title: "异常",
+                                    content: "与服务器联系丢失。",
+                                    showCancel: false,
+                                });
+                                return;
+                            }
+                            wx.setStorageSync("my_session_key", "sessionid=" + data.data.my_session_key);
+                            wx.showModal({
+                                title: "注意",
+                                content: "您还未与人员库绑定，请重新绑定。",
+                                showCancel: false,
+                                success: function(res) {
+                                    wx.redirectTo({
+                                        url: "../register/register"
+                                    });
+                                }
+                            });
+                        }
                         else
                             wx.showModal({
-                                title: '异常',
+                                title: "异常",
                                 content: data.data.errmsg,
                             });
                     } else {
                         var msk = data.data.my_session_key;
                         if(msk)
                             wx.setStorageSync("my_session_key", "sessionid=" + msk);
+                        else
+                            wx.showModal({
+                                title: "异常",
+                                content: JSON.stringify(data.data),
+                                showCancel: false
+                            });
                         that.globalData.privateUserInfo = data.data;
                     }
                 }
@@ -60,7 +88,7 @@ App({
     // 获取用户信息
     wx.getSetting({
         success: res => {
-            if (res.authSetting['scope.userInfo']) {
+            /*if (res.authSetting['scope.userInfo']) {
             // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
                 wx.getUserInfo({
                     success: res => {
@@ -74,7 +102,7 @@ App({
                         }
                     }
                 });
-            }/* else {
+            } else {
                 wx.authorize({
                     scope: 'scope.userInfo',
                     success() {

@@ -20,7 +20,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
     onLoad: function (options) {
-        if (app.globalData.userInfo) {
+        /*if (app.globalData.userInfo) {
             this.setData({
                 userInfo: app.globalData.userInfo,
                 hasUserInfo: true
@@ -45,7 +45,7 @@ Page({
                     });
                 }
             });
-        }
+        }*/
 
         if(!app.globalData.privateUserInfo) {
             this.getPrivateUserInfoLoop();
@@ -60,7 +60,6 @@ Page({
                 rejectlogin: true
             });
         }
-        //console.log();
     },
 
   /**
@@ -113,7 +112,7 @@ Page({
   },
     onCurrentUserLogin: function(event) {
         var that = this;
-        var my_session_key = wx.getStorageSync('my_session_key');
+        var my_session_key = wx.getStorageSync("my_session_key");
         wx.request({
             url: "https://ncexam.jingjingjing.wang/ifNewUserLogin",
             header: {
@@ -127,7 +126,7 @@ Page({
                     if(resp.errmsg == "openidlost") {
                         wx.showModal({
                             title: "异常",
-                            content: "远端用户信息丢失。",
+                            content: "无法获取与您的微信号关联的人员信息，导致此问题的原因可能是您不是通过手机注册的考试账号。",
                             showCancel: false
                         });
                         return;

@@ -1,4 +1,4 @@
-<scroll-view style="height: {{ window_height }};margin-bottom: 55rpx" scroll-y="true" scroll-with-animation="true" scroll-into-view="{{ to_view }}">
+<scroll-view style="height: {{ window_height }}" scroll-y="true" scroll-with-animation="true" scroll-into-view="{{ to_view }}">
     <form bind:submit="onHandin">
         <view wx:for="{{ question_groups }}" wx:key="type_name">
             <questions>
@@ -37,8 +37,7 @@
                                 <view wx:for="{{ ques.question_answer_texts }}" wx:key="*this">
                                     <view style="display: flex;flex-direction: row;align-items: center">
                                         <text decode="{{ true }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
-                                        <radio value="{{ item.body }}" checked="{{ false }}" /><text>{{ item.header }}.</text>
-                                        <text>{{ item.body }}</text>
+                                        <radio value="{{ item.header }}" checked="{{ false }}" /><text>{{ item.header }}</text>
                                         <text style="height: 15rpx"> </text>
                                     </view>
                                 </view>
@@ -80,4 +79,5 @@
             </view>
         </view>
     </form>
+    <view style="height: 55rpx"> </view>
 </scroll-view>
