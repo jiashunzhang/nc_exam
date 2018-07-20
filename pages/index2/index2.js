@@ -1,5 +1,5 @@
 // pages/index2/index2.js
-
+const innerAudioContext = wx.createInnerAudioContext();
 Page({
 
   /**
@@ -14,8 +14,7 @@ data: {
     workshop_name: "未知",
     p_count_interval: 2000,
     timer_id: null,
-    undone_exam_count: 0,
-    innerAudioContext: undefined
+    undone_exam_count: 0
 },
 
   /**
@@ -59,14 +58,16 @@ data: {
                         avg_score: Math.round(resp.avg_score),
                         work_type_name: resp.mem_wtn,
                         workshop_name: resp.mem_dep,
-                        pos_name: resp.mem_pos,
-                        innerAudioContext: wx.createInnerAudioContext()
+                        pos_name: resp.mem_pos
                     });
-                    that.data.innerAudioContext.autoplay = false;
-                    that.data.innerAudioContext.src = "https://ncexam-1255671825.cos.ap-chengdu.myqcloud.com/%E6%8F%90%E7%A4%BA%E9%9F%B3.wav";
-                    that.data.innerAudioContext.onError((res) => {
+                    innerAudioContext.autoplay = false;
+                    innerAudioContext.src = "https://ncexam-1255671825.cos.ap-chengdu.myqcloud.com/%E6%8F%90%E7%A4%BA%E9%9F%B3.wav";
+                    innerAudioContext.onError((res) => {
                         console.log(res.errCode, res.errMsg);
                     });
+                    /*innerAudioContext.onPlay((res) => {
+                        console.log("开始播放。");
+                    });*/
                 }
             }
         });
@@ -147,14 +148,14 @@ data: {
             method: "POST",
             success: function (data, statusCode, header) {
                 var resp = data.data;
+                if (that.data.undone_exam_count != "99+") {
+                    if (parseInt(resp.count) > parseInt(that.data.undone_exam_count))
+                        innerAudioContext.play();
+                }
                 if(resp.count) {
                     that.setData({
                         undone_exam_count: (parseInt(resp.count) > 99 ? "99+" : resp.count)
                     });
-                    if (that.data.undone_exam_count != "99+") {
-                        if(parseInt(resp.count) > parseInt(that.data.undone_exam_count))
-                            that.data.innerAudioContext.play();
-                    }
                 }
             }
         });

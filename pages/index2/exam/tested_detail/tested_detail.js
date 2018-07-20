@@ -48,8 +48,12 @@ Page({
                     var ans_depart = arr_answers[j].split(".");
                     if(ans_depart.length < 2)
                         obj_answers.push({ "body": ans_depart[0] });
-                    else
-                        obj_answers.push({ "header": ans_depart[0], "body": ans_depart[1] });
+                    else {
+                        var ans_content_arr = [];
+                        for(var k = 1; k < ans_depart.length; k++)
+                            ans_content_arr.push(ans_depart[k]);
+                        obj_answers.push({ "header": ans_depart[0], "body": ans_content_arr.join(".") });
+                    }
                 }
 
                 resp[i].question_answer_texts = obj_answers;

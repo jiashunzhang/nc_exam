@@ -8,7 +8,13 @@
         <image style="width: 55rpx;height: 55rpx" src="../../statics/images/search.png"></image>
         
     </view>-->
-    <view style="width: 100%;display: flex;flex-direction: column;justify-content: center"><text style="text-align: center;font-size: 25rpx">—— ◆ 试卷分类 ◆ ——</text></view>
+    <view style="width: 100%;display: flex;flex-direction: column;justify-content: center">
+        <text style="text-align: center;font-size: 25rpx">—— ◆ 试卷分类 ◆ ——</text>
+    </view>
+    <view wx:if="{{ examCatalogList.length == 0 }}" style="display: flex; flex-direction: column; justify-content: center; align-items: center">
+        <image src="../../../statics/images/自习.png" style="width: 250rpx; height: 250rpx"></image>
+        <view style="color: red">暂时还没有为您准备的题库。</view>
+    </view>
     <view class="weui-form-preview" wx:for="{{ examCatalogList }}" wx:key="{{ index }}" style="margin-bottom: 20rpx;width: 100%;">
         <view class="weui-form-preview__hd">
             <view class="weui-form-preview__item">

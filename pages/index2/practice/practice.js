@@ -37,7 +37,7 @@ Page({
       });
     }
 
-    var my_session_key = wx.getStorageSync('my_session_key');
+    var my_session_key = wx.getStorageSync("my_session_key");
     var that = this;
     wx.request({
         url: "https://ncexam.jingjingjing.wang/getMyPaperTypes",

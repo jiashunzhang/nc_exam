@@ -79,7 +79,10 @@ Page({
                       var obj_answers = [];
                       for (var j in arr_answers) {
                           var ans_depart = arr_answers[j].split(".");
-                          obj_answers.push({ "header": ans_depart[0], "body": ans_depart[1] });
+                          var ans_content_arr = [];
+                          for(var k = 1; k < ans_depart.length; k++)
+                            ans_content_arr.push(ans_depart[k]);
+                          obj_answers.push({ "header": ans_depart[0], "body": ans_content_arr.join(".") });
                       }
 
                       resp[i].question_answer_texts = obj_answers;

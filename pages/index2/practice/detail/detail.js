@@ -15,7 +15,7 @@ Page({
    */
   onLoad: function (options) {
       this.setData({ paper_type_name: options.typename });
-      var my_session_key = wx.getStorageSync('my_session_key');
+      var my_session_key = wx.getStorageSync("my_session_key");
       var that = this;
       wx.request({
           url: "https://ncexam.jingjingjing.wang/getTestPapersByType",
