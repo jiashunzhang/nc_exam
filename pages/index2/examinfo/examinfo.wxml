@@ -20,7 +20,7 @@
             </view>
             <view class="weui-form-preview__item">
                 <view class="weui-form-preview__label">所得分数</view>
-                <view class="weui-form-preview__value">{{ item.score }}分</view>
+                <view class="weui-form-preview__value">{{ item.score == -1 ? '缺考' : item.score }}{{ item.score == -1 ? '' : '分' }}</view>
             </view>
             <view class="weui-form-preview__item">
                 <view class="weui-form-preview__label">考试时间</view>

@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
     data: {
-        question_groups: undefined
+        question_groups: undefined,
+        q_type_num_map: ["一", "二", "三"]
     },
 
   /**

@@ -21,5 +21,8 @@
         正在加载用户信息……
     </text>
     <button wx:if="{{ !rejectlogin }}" type="primary" style="margin: 15rpx" bind:tap="onCurrentUserLogin" disabled="{{ privateUserInfo ? '' : true }}">使用当前用户登录</button><button type="default" bind:tap="onOtherUserLogin" disabled="true">使用其他用户登录</button>
-    <text style="position: absolute;bottom: 0;font-size: 25rpx;color: white">南仓站信息化车间©{{ curYear }}|版本0.0.7</text>
+    <view style="position: absolute; bottom: 0">
+        <text style="font-size: 25rpx;color: white">南仓站信息化车间©{{ curYear }}|</text>
+        <text style="font-size: 25rpx; color: white;text-decoration: underline" bind:tap="onShowChangelog">0.0.10</text>
+    </view>
 </view>

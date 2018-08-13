@@ -165,6 +165,13 @@ Page({
             url: "../register/register"
         });
     },
+    onShowChangelog: function(event) {
+        wx.showModal({
+            title: "版本变化",
+            content: "改进长选项显示问题。",
+            showCancel: false
+        });
+    },
     getPrivateUserInfoLoop: function() {
         this.setData({
             getUserLoopCount: this.data.getUserLoopCount + 1

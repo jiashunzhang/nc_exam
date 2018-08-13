@@ -315,7 +315,7 @@ function handinPaper(that, paper_detail, my_session_key) {
         },
         success: function (data, statusCode, header) {
             var resp = data.data;
-            console.log(JSON.stringify(resp));
+            //console.log(JSON.stringify(resp));
             if (resp.errmsg != undefined && resp.errmsg != null && resp.errmsg != "OK") {
                 wx.showModal({
                     title: "异常",
@@ -324,16 +324,23 @@ function handinPaper(that, paper_detail, my_session_key) {
                 });
                 return;
             }
-            else {
+            else if(resp === undefined || resp === null || resp == "") {
                 wx.showModal({
                     title: "异常",
-                    content: "服务嚣未返回数据。",
+                    content: "服务器未返回数据。",
+                    showCancel: false
+                });
+            } else if(resp.errmsg == "OK") {
+                wx.redirectTo({
+                    url: "./score/score?score=" + resp.score + "&passing_score=" + resp.passing_score + "&test_paper_id=" + resp.test_paper_id + "&elapsed=" + that.data.count_time
+                });
+            } else {
+                wx.showModal({
+                    title: "异常",
+                    content: "未知异常。",
                     showCancel: false
                 });
             }
-            wx.redirectTo({
-                url: "./score/score?score=" + resp.score + "&passing_score=" + resp.passing_score + "&test_paper_id=" + resp.test_paper_id + "&elapsed=" + that.data.count_time
-            });
         }
     });
 }

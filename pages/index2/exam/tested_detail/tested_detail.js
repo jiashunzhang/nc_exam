@@ -6,11 +6,7 @@ Page({
    */
     data: {
         question_groups: undefined,
-        q_type_num_map: {
-            "选择题": "一",
-            "多选题": "二",
-            "判断题": "三"
-        }
+        q_type_num_map: [ "一", "二", "三" ]
     },
 
   /**
