@@ -39,6 +39,31 @@ Page({
       });
       //console.log(this.data.window_width);
       wx.request({
+        url: "https://ncexam.jingjingjing.wang/accumulatePoints",
+        data: {
+          acc_type: "start_practise"
+        },
+        header: {
+          "Cookie": my_session_key,
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        method: "POST",
+        success: function (data, statusCode, header) {
+          let resp = data.data;
+          if(resp == "" || resp == undefined || resp == null)
+            wx.showModal({
+              title: "异常",
+              content: "服务器未返回积分数据。"
+            });
+          else if(resp.errmsg)
+            wx.showModal({
+              title: "异常",
+              content: resp.errmsg
+            });
+        }
+      });
+
+      wx.request({
           url: "https://ncexam.jingjingjing.wang/getRandomTest",
           data: {
             paper_id: options.paper_id

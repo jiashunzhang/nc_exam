@@ -12,20 +12,57 @@ Page({
         elapsed: "",
         fullwork_packet: null,
         fullmark_packet: null,
-        show_red_packet_image: true
+        show_red_packet_image: true,
+        allow_red_packet: "1",
+        accumulate_points: 0,
+        cur_acc_points: 0
     },
 
   /**
    * 生命周期函数--监听页面加载
    */
     onLoad: function (options) {
-        this.setData({
-            score: Math.trunc(options.score),
-            passing_score: Math.round(options.passing_score),
-            test_paper_id: options.test_paper_id,
-            elapsed: options.elapsed,
-            signin_count: options.signin_count
-        });
+      let that = this;
+      wx.request({
+        url: "https://ncexam.jingjingjing.wang/accumulatePoints",
+        data: {
+          acc_type: "score",
+          score: options.score
+        },
+        header: {
+          "Cookie": my_session_key,
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        method: "POST",
+        success: function (data, statusCode, header) {
+          let resp = data.data;
+          if (resp == "" || resp == undefined || resp == null)
+            wx.showModal({
+              title: "异常",
+              content: "服务器未返回积分数据。"
+            });
+          else if (resp.errmsg)
+            wx.showModal({
+              title: "异常",
+              content: resp.errmsg
+            });
+          else {
+            that.setData({
+              accumulate_points: resp.accumulate_points,
+              cur_acc_points: resp.cur_acc_points
+            });
+          }
+        }
+      });
+      arp = wx.getStorageSync("allow_red_packet");
+      this.setData({
+        score: Math.trunc(options.score),
+        passing_score: Math.round(options.passing_score),
+        test_paper_id: options.test_paper_id,
+        elapsed: options.elapsed,
+        signin_count: options.signin_count,
+        allow_red_packet: arp
+      });
     },
 
   /**

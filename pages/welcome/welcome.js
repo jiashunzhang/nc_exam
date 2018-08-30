@@ -169,7 +169,7 @@ Page({
     onShowChangelog: function(event) {
         wx.showModal({
             title: "版本变化",
-            content: "1、改进长选项显示问题。\r\n2、添加小程序码。",
+            content: "初步实现红包功能。",
             showCancel: false
         });
     },

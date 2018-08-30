@@ -14,7 +14,8 @@ data: {
     workshop_name: "未知",
     p_count_interval: 2000,
     timer_id: null,
-    undone_exam_count: 0
+    undone_exam_count: 0,
+    mem_allow_rp: 1
 },
 
   /**
@@ -22,7 +23,7 @@ data: {
    */
     onLoad: function (options) {
         var that = this;
-        var my_session_key = wx.getStorageSync('my_session_key');
+        var my_session_key = wx.getStorageSync("my_session_key");
 
         wx.request({
             url: "https://ncexam.jingjingjing.wang/getIndexInfo",
@@ -58,8 +59,12 @@ data: {
                         avg_score: Math.round(resp.avg_score),
                         work_type_name: resp.mem_wtn,
                         workshop_name: resp.mem_dep,
-                        pos_name: resp.mem_pos
+                        pos_name: resp.mem_pos,
+                        mem_allow_rp: resp.mem_allow_rp
                     });
+
+                    wx.setStorageSync("allow_red_packet", resp.mem_allow_rp);
+
                     innerAudioContext.autoplay = false;
                     innerAudioContext.src = "https://ncexam-1255671825.cos.ap-chengdu.myqcloud.com/%E6%8F%90%E7%A4%BA%E9%9F%B3.wav";
                     innerAudioContext.onError((res) => {
