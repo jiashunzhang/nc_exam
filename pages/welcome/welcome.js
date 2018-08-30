@@ -13,7 +13,8 @@ Page({
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         curYear: (new Date()).getFullYear(),
         privateUserInfo: null,
-        getUserLoopCount: 0
+        getUserLoopCount: 0,
+        if_qrcode: false
     },
 
   /**
@@ -168,7 +169,7 @@ Page({
     onShowChangelog: function(event) {
         wx.showModal({
             title: "版本变化",
-            content: "改进长选项显示问题。",
+            content: "1、改进长选项显示问题。\r\n2、添加小程序码。",
             showCancel: false
         });
     },
@@ -184,5 +185,10 @@ Page({
                 privateUserInfo: app.globalData.privateUserInfo
             });
         }
+    },
+    onQR: function() {
+        this.setData({
+            if_qrcode: !this.data.if_qrcode
+        });
     }
-})
+});

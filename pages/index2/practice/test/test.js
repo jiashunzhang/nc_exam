@@ -37,7 +37,7 @@ Page({
           window_width: res.windowWidth + "px",
           qmv_hidden: true
       });
-      console.log(this.data.window_width);
+      //console.log(this.data.window_width);
       wx.request({
           url: "https://ncexam.jingjingjing.wang/getRandomTest",
           data: {
@@ -299,7 +299,7 @@ function handinPaper(that, paper_detail, my_session_key) {
             paper_detail[i] = (paper_detail[i].sort().join());
         }
     }
-    console.log(JSON.stringify(paper_detail));
+    //console.log(JSON.stringify(paper_detail));
 
     wx.request({
         url: "https://ncexam.jingjingjing.wang/handin",
@@ -331,8 +331,35 @@ function handinPaper(that, paper_detail, my_session_key) {
                     showCancel: false
                 });
             } else if(resp.errmsg == "OK") {
-                wx.redirectTo({
-                    url: "./score/score?score=" + resp.score + "&passing_score=" + resp.passing_score + "&test_paper_id=" + resp.test_paper_id + "&elapsed=" + that.data.count_time
+                wx.request({
+                    url: "https://ncexam.jingjingjing.wang/signin",
+                    data: {},
+                    method: "POST",
+                    header: {
+                        "Cookie": my_session_key,
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    success: function(signin_data, sign_statusCode, signin_Header) {
+                        let signin_resp = signin_data.data;
+                        if (signin_resp.errmsg != undefined && signin_resp.errmsg != null && signin_resp.errmsg != "OK") {
+                            wx.showModal({
+                                title: "异常",
+                                content: signin_resp.errmsg,
+                                showCancel: false
+                            });
+                        }
+                        else if (signin_resp === undefined || signin_resp === null || signin_resp == "") {
+                            wx.showModal({
+                                title: "异常",
+                                content: "服务器未返回签到数据。",
+                                showCancel: false
+                            });
+                        } else if (signin_resp.errmsg == "OK") {
+                            wx.redirectTo({
+                                url: "./score/score?score=" + resp.score + "&passing_score=" + resp.passing_score + "&test_paper_id=" + resp.test_paper_id + "&elapsed=" + that.data.count_time + "&signin_count=" + signin_resp.count
+                            });
+                        }
+                    }
                 });
             } else {
                 wx.showModal({

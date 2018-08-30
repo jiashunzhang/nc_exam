@@ -1,28 +1,34 @@
 <!--pages/welcome/welcome.wxml-->
 <view style="width: 100%;height: 100%;margin: 0;padding: 0;display: flex;flex-direction: column;align-items: center">
-    <text class="title" style="margin-top: 50rpx">北京局集团公司</text>
-    <text class="title">南仓站职工微信答题系统</text>
-    <view style="display: flex; flex-direction: column; align-items: center; justify-content:center; margin: 0 0 40rpx 0; padding: 0">
-        <!--<image src="{{ userInfo.avatarUrl }}" style="width: 128rpx;height: 128rpx;margin-top: 160rpx"></image>
-        <text style="margin-bottom: 80rpx">{{ userInfo.nickName }}</text>-->
-        <open-data type="userAvatarUrl" style="width: 128rpx;height: 128rpx;margin-top: 160rpx"></open-data>
+    <view wx:if="{{ if_qrcode }}" style="width: 100%; height: 100%; margin: 0;padding: 0;display: flex;flex-direction: column;align-items: center; justify-content: center; margin-top: 350rpx">
+        <image bind:tap="onQR" style="width: 400rpx; height: 400rpx" src="https://ncexam-1255671825.cos.ap-chengdu.myqcloud.com/%E4%BA%8C%E7%BB%B4%E7%A0%81.png">
+        </image>
     </view>
-    <view wx:if="{{ privateUserInfo }}" style="display: flex; flex-direction: column; align-items: center; justify-content:center; margin: 0 0 40rpx 0; padding: 0">
-        <view style="font-weight: bold; color: transparent; background-color: #CC0000 ; text-shadow: rgba(255,255,255,0.5) 0 5rpx 6rpx, rgba(255,255,255,0.2) 1rpx 3rpx 3rpx; -webkit-background-clip: text">{{ privateUserInfo.mem_name }}</view>
-        <view style="display: flex; flex-direction: row; justify-content: center">
-            <text class="work-info">{{ privateUserInfo.mem_dep }}</text>
-            <text class="work-info-bold" decode="true">&nbsp;&nbsp;-&nbsp;&nbsp;</text>
-            <text class="work-info">{{ privateUserInfo.mem_wt }}</text>
-            <text class="work-info-bold" decode="true">&nbsp;&nbsp;-&nbsp;&nbsp;</text>
-            <text class="work-info">{{ privateUserInfo.mem_pos }}</text>
+    <view wx:else style="width: 100%;margin: 0;padding: 0;display: flex;flex-direction: column;align-items: center">
+        <text class="title" style="margin-top: 50rpx">北京局集团公司</text>
+        <text class="title" bind:tap="onQR">南仓站职工微信答题系统</text>
+        <view style="display: flex; flex-direction: column; align-items: center; justify-content:center; margin: 0 0 40rpx 0; padding: 0">
+            <!--<image src="{{ userInfo.avatarUrl }}" style="width: 128rpx;height: 128rpx;margin-top: 160rpx"></image>
+            <text style="margin-bottom: 80rpx">{{ userInfo.nickName }}</text>-->
+            <open-data type="userAvatarUrl" style="width: 128rpx;height: 128rpx;margin-top: 160rpx"></open-data>
         </view>
-    </view>
-    <text wx:else style="color: red">
-        正在加载用户信息……
-    </text>
-    <button wx:if="{{ !rejectlogin }}" type="primary" style="margin: 15rpx" bind:tap="onCurrentUserLogin" disabled="{{ privateUserInfo ? '' : true }}">使用当前用户登录</button><button type="default" bind:tap="onOtherUserLogin" disabled="true">使用其他用户登录</button>
-    <view style="position: absolute; bottom: 0">
-        <text style="font-size: 25rpx;color: white">南仓站信息化车间©{{ curYear }}|</text>
-        <text style="font-size: 25rpx; color: white;text-decoration: underline" bind:tap="onShowChangelog">0.0.10</text>
+        <view wx:if="{{ privateUserInfo }}" style="display: flex; flex-direction: column; align-items: center; justify-content:center; margin: 0 0 40rpx 0; padding: 0">
+            <view style="font-weight: bold; color: transparent; background-color: #CC0000 ; text-shadow: rgba(255,255,255,0.5) 0 5rpx 6rpx, rgba(255,255,255,0.2) 1rpx 3rpx 3rpx; -webkit-background-clip: text">{{ privateUserInfo.mem_name }}</view>
+            <view style="display: flex; flex-direction: row; justify-content: center">
+                <text class="work-info">{{ privateUserInfo.mem_dep }}</text>
+                <text class="work-info-bold" decode="true">&nbsp;&nbsp;-&nbsp;&nbsp;</text>
+                <text class="work-info">{{ privateUserInfo.mem_wt }}</text>
+                <text class="work-info-bold" decode="true">&nbsp;&nbsp;-&nbsp;&nbsp;</text>
+                <text class="work-info">{{ privateUserInfo.mem_pos }}</text>
+            </view>
+        </view>
+        <text wx:else style="color: red">
+            正在加载用户信息……
+        </text>
+        <button wx:if="{{ !rejectlogin }}" type="primary" style="margin: 15rpx" bind:tap="onCurrentUserLogin" disabled="{{ privateUserInfo ? '' : true }}">使用当前用户登录</button><button type="default" bind:tap="onOtherUserLogin" disabled="true">使用其他用户登录</button>
+        <view style="position: absolute; bottom: 0">
+            <text style="font-size: 25rpx;color: white">南仓站信息化车间©{{ curYear }}|</text>
+            <text style="font-size: 25rpx; color: white;text-decoration: underline" bind:tap="onShowChangelog">0.0.11</text>
+        </view>
     </view>
 </view>

@@ -8,7 +8,11 @@ Page({
         score: 0,
         passing_score: 0,
         test_paper_id: null,
-        elapsed: ""
+        signin_count: 0,
+        elapsed: "",
+        fullwork_packet: null,
+        fullmark_packet: null,
+        show_red_packet_image: true
     },
 
   /**
@@ -16,10 +20,11 @@ Page({
    */
     onLoad: function (options) {
         this.setData({
-            score: Math.round(options.score),
+            score: Math.trunc(options.score),
             passing_score: Math.round(options.passing_score),
             test_paper_id: options.test_paper_id,
-            elapsed: options.elapsed
+            elapsed: options.elapsed,
+            signin_count: options.signin_count
         });
     },
 
@@ -75,5 +80,56 @@ Page({
         wx.redirectTo({
             url: "../../tested_detail/tested_detail?test_id=" + this.data.test_paper_id
         });
+    },
+    onRedPacketOpened: function() {
+        var that = this;
+        var my_session_key = wx.getStorageSync("my_session_key");
+
+        this.setData({
+            show_red_packet_image: false
+        });
+
+        wx.showLoading({
+            title: "正在打开红包"
+        });
+
+        wx.request({
+            url: "https://ncexam.jingjingjing.wang/openTestRedPacket",
+            data: {
+                score: this.data.score,
+                test_paper_id: this.data.test_paper_id
+            },
+            method: "POST",
+            header: {
+                "Cookie": my_session_key,
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            success: function(data, statusCode, header) {
+                let resp = data.data;
+
+                //console.log(JSON.stringify(resp));
+                if(resp == undefined || resp == "" || resp == null)
+                    wx.showModal({
+                        title: "异常",
+                        content: "数据库未返回数据。",
+                        showCancel: false
+                    });
+                else if(resp.errmsg)
+                    wx.showModal({
+                        title: "异常",
+                        content: resp.errmsg,
+                        showCancel: false
+                    });
+                else {
+                    that.setData({
+                        fullwork_packet: resp.fwp,
+                        fullmark_packet: resp.fmp
+                    });
+                }
+            },
+            complete: function() {
+                wx.hideLoading();
+            }
+        });
     }
-})
+});
