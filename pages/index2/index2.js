@@ -17,13 +17,8 @@ data: {
     undone_exam_count: 0,
     mem_allow_rp: 1
 },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-    onLoad: function (options) {
-        var that = this;
-        var my_session_key = wx.getStorageSync("my_session_key");
+    getIndexInfo: function(that) {
+        let my_session_key = wx.getStorageSync("my_session_key");
 
         wx.request({
             url: "https://ncexam.jingjingjing.wang/getIndexInfo",
@@ -34,8 +29,8 @@ data: {
             method: "POST",
             success: function (data, statusCode, header) {
                 var resp = data.data;
-                if(resp.errmsg != undefined && resp.errmsg != null && resp.errmsg != "") {
-                    if(resp.errmsg == "notloggedin")
+                if (resp.errmsg != undefined && resp.errmsg != null && resp.errmsg != "") {
+                    if (resp.errmsg == "notloggedin")
                         wx.redirectTo({
                             url: "../welcome/welcome"
                         });
@@ -44,7 +39,7 @@ data: {
                             title: "异常",
                             content: resp.errmsg,
                             showCancel: false,
-                            success: function(res) {
+                            success: function (res) {
                                 wx.redirectTo({
                                     url: "../welcome/welcome"
                                 });
@@ -77,6 +72,11 @@ data: {
             }
         });
     },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+    onLoad: function (options) {
+    },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -89,6 +89,7 @@ data: {
    * 生命周期函数--监听页面显示
    */
     onShow: function () {
+        this.getIndexInfo(this);
         this.PCountTimerProc();
         this.initPCountTimer();
     },

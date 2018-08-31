@@ -74,7 +74,7 @@ Page({
     });
   },
   onPaperTypeClicked: function(event) {
-    wx.navigateTo({
+    wx.redirectTo({
         url: "./detail/detail?papertype=" + event.target.dataset.typeId + "&typename=" + event.target.dataset.typeName
     });    
   },

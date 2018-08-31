@@ -1,6 +1,5 @@
 // pages/test/score/score.js
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -23,11 +22,13 @@ Page({
    */
     onLoad: function (options) {
       let that = this;
+      let my_session_key = wx.getStorageSync("my_session_key");
       wx.request({
         url: "https://ncexam.jingjingjing.wang/accumulatePoints",
         data: {
-          acc_type: "score",
-          score: options.score
+          acc_type: "得分积分",
+          score: options.score,
+          test_paper_id: options.test_paper_id
         },
         header: {
           "Cookie": my_session_key,
@@ -39,14 +40,17 @@ Page({
           if (resp == "" || resp == undefined || resp == null)
             wx.showModal({
               title: "异常",
-              content: "服务器未返回积分数据。"
+              content: "服务器未返回积分数据。",
+              showCancel: false
             });
           else if (resp.errmsg)
             wx.showModal({
               title: "异常",
-              content: resp.errmsg
+              content: resp.errmsg,
+              showCancel: false
             });
           else {
+            //console.log(JSON.stringify(resp));
             that.setData({
               accumulate_points: resp.accumulate_points,
               cur_acc_points: resp.cur_acc_points
@@ -54,7 +58,7 @@ Page({
           }
         }
       });
-      arp = wx.getStorageSync("allow_red_packet");
+      let arp = wx.getStorageSync("allow_red_packet");
       this.setData({
         score: Math.trunc(options.score),
         passing_score: Math.round(options.passing_score),
@@ -89,9 +93,9 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-  
-  },
+    onUnload: function () {
+        
+    },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -145,24 +149,26 @@ Page({
                 let resp = data.data;
 
                 //console.log(JSON.stringify(resp));
-                if(resp == undefined || resp == "" || resp == null)
+                if(resp == undefined || resp == "" || resp == null) {
                     wx.showModal({
                         title: "异常",
                         content: "数据库未返回数据。",
                         showCancel: false
                     });
-                else if(resp.errmsg)
+                    return;
+                }
+                if(resp.errmsg != null && resp.errmsg != undefined && resp.errmsg != "") {
                     wx.showModal({
                         title: "异常",
                         content: resp.errmsg,
                         showCancel: false
                     });
-                else {
-                    that.setData({
-                        fullwork_packet: resp.fwp,
-                        fullmark_packet: resp.fmp
-                    });
+                    return;
                 }
+                that.setData({
+                    fullwork_packet: resp.fwp,
+                    fullmark_packet: resp.fmp
+                });
             },
             complete: function() {
                 wx.hideLoading();

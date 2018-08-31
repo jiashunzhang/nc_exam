@@ -20,6 +20,7 @@ Page({
         question_micro_view_arr: [],
         qmv_hidden: true,
         window_height: "0",
+        freeze: false
     },
 
   /**
@@ -27,7 +28,7 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
-      var my_session_key = wx.getStorageSync('my_session_key');
+      var my_session_key = wx.getStorageSync("my_session_key");
       var res = wx.getSystemInfoSync();
 
       this.setData({
@@ -36,31 +37,6 @@ Page({
           window_height: res.windowHeight + "px",
           window_width: res.windowWidth + "px",
           qmv_hidden: true
-      });
-      //console.log(this.data.window_width);
-      wx.request({
-        url: "https://ncexam.jingjingjing.wang/accumulatePoints",
-        data: {
-          acc_type: "start_practise"
-        },
-        header: {
-          "Cookie": my_session_key,
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        method: "POST",
-        success: function (data, statusCode, header) {
-          let resp = data.data;
-          if(resp == "" || resp == undefined || resp == null)
-            wx.showModal({
-              title: "异常",
-              content: "服务器未返回积分数据。"
-            });
-          else if(resp.errmsg)
-            wx.showModal({
-              title: "异常",
-              content: resp.errmsg
-            });
-        }
       });
 
       wx.request({
@@ -211,8 +187,33 @@ Page({
         });
     },
     onHandin: function (e) {
-        var that = this
-        var my_session_key = wx.getStorageSync('my_session_key');
+        let that = this
+        let my_session_key = wx.getStorageSync("my_session_key");
+        wx.request({
+            url: "https://ncexam.jingjingjing.wang/accumulatePoints",
+            data: {
+                acc_type: "参与积分",
+                score: 0
+            },
+            header: {
+                "Cookie": my_session_key,
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            method: "POST",
+            success: function (data, statusCode, header) {
+                let resp = data.data;
+                if (resp == "" || resp == undefined || resp == null)
+                    wx.showModal({
+                        title: "异常",
+                        content: "服务器未返回积分数据。"
+                    });
+                else if (resp.errmsg)
+                    wx.showModal({
+                        title: "异常",
+                        content: resp.errmsg
+                    });
+            }
+        });
         if(this.data.done_count != this.data.question_count) {
             wx.showModal({
                 title: "提示",
@@ -278,6 +279,14 @@ Page({
 function countDown(that) {
     var sec_left = that.data.count_down_seconds;
     if(sec_left <= 0) {
+        that.setData({
+            freeze: true
+        });
+        wx.showModal({
+            title: "本次练习时间已到，试题已冻结，请交卷或返回放弃本次练习。",
+            content: "提示",
+            showCancel: false
+        });
         return;
     }
     setTimeout(function(){

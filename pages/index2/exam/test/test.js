@@ -20,6 +20,7 @@ Page({
         question_micro_view_arr: [],
         qmv_hidden: true,
         window_height: "0",
+        freeze: false
     },
 
   /**
@@ -261,6 +262,14 @@ Page({
 function countDown(that) {
     var sec_left = that.data.count_down_seconds;
     if(sec_left <= 0) {
+        that.setData({
+            freeze: true
+        });
+        wx.showModal({
+            title: "本次考试时间已到，试题已冻结，请交卷或返回放弃本次考试。",
+            content: "提示",
+            showCancel: false
+        });
         return;
     }
     setTimeout(function(){
