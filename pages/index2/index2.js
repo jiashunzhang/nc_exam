@@ -15,7 +15,9 @@ data: {
     p_count_interval: 2000,
     timer_id: null,
     undone_exam_count: 0,
-    mem_allow_rp: 1
+    mem_allow_rp: 1,
+    animation_left: null,
+    animation_right: null
 },
     getIndexInfo: function(that) {
         let my_session_key = wx.getStorageSync("my_session_key");
@@ -92,6 +94,7 @@ data: {
         this.getIndexInfo(this);
         this.PCountTimerProc();
         this.initPCountTimer();
+        this.getHeight();
     },
 
   /**
@@ -129,7 +132,8 @@ data: {
   
   },
     onCardTap: function(event) {
-        if (event.currentTarget.dataset.tapName == "wrongs" || event.currentTarget.dataset.tapName == "business_learn"){
+        //if (event.currentTarget.dataset.tapName == "wrongs" || event.currentTarget.dataset.tapName == "business_learn"){
+        if (event.currentTarget.dataset.tapName == "business_learn") {
             wx.showModal({
                 title: "提示",
                 content: "该功能尚未开通。",
@@ -171,6 +175,58 @@ data: {
         var t_id = setInterval(this.PCountTimerProc, this.data.p_count_interval);
         this.setData({
             timer_id: t_id
+        });
+    },
+    nbScroll: function(con_height, list_height, dir) {
+        let continue_time = (parseInt(list_height / con_height) + 1) * 10000;
+        let interval = 50 + continue_time;
+
+        let animation = wx.createAnimation({
+            duration: 200,
+            timingFunction: "linear",
+            delay: 0
+        });
+
+        animation.translateY(con_height)
+                 .step({ duration: 50, timingFunction: "step-start" })
+                 .translateY(-list_height * 2.0)
+                 .step({ duration: continue_time });
+        //eval("this.setData({ animation_" + dir + ": animation.export() })");
+        if(dir == "left") 
+            this.setData({
+                animation_left: animation.export()
+            });
+        else
+            this.setData({
+                animation_right: animation.export()
+            });
+
+        setInterval(() => {
+            animation.translateY(con_height)
+                .step({ duration: 50, timingFunction: "step-start" })
+                .translateY(-list_height * 2.0)
+                .step({ duration: continue_time });
+            //eval("this.setData({ animation_" + dir + ": animation.export() })");
+            if (dir == "left")
+                this.setData({
+                    animation_left: animation.export()
+                });
+            else
+                this.setData({
+                    animation_right: animation.export()
+                });
+        }, interval);
+    },
+    getHeight: function() {
+        let query = wx.createSelectorQuery();
+
+        query.select("#container_left").boundingClientRect();
+        query.select("#container_right").boundingClientRect();
+        query.select("#nb_left").boundingClientRect();
+        query.select("#nb_right").boundingClientRect();
+        query.exec((res) => {
+            this.nbScroll(res[0].height, res[2].height, "left");
+            this.nbScroll(res[1].height, res[3].height, "right");
         });
     }
 });

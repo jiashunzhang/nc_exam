@@ -12,6 +12,37 @@
         </view>
     </view>
     <view class="box2">
+        <view style="width: 100%; display: flex; justify-content: center">
+            <view style="width: 50%; display: flex; flex-direction: column; align-items: center; overflow: hidden" id="container_left">
+                <text style="font-size: 25rpx; color: blue">♦通知♦</text>
+                <view class="notice_board" style="border-right: 1rpx solid #DEDEDE" id="nb_left" animation="{{ animation_left }}">
+                    <view>测试1</view>
+                    <view>测试1</view>
+                    <view>测试1</view>
+                    <view>测试1</view>
+                    <view>测试1</view>
+                    <view>测试1</view>
+                    <view>测试1</view>
+                    <view>测试1</view>
+                </view>
+            </view>
+            <view style="width: 50%; display: flex; flex-direction: column; align-items: center; overflow: hidden" id="container_right">
+                <text style="font-size: 25rpx; color: red">💴奖励💴</text>
+                <view class="notice_board" id="nb_right" animation="{{ animation_right }}">
+                    <view>测试1</view>
+                    <view>测试1</view>
+                    <view>测试1</view>
+                    <view>测试1</view>
+                    <view>测试1</view>
+                    <view>测试1</view>
+                    <view>测试1</view>
+                    <view>测试1</view>
+                    <view>测试1</view>
+                    <view>测试1</view>
+                </view>
+            </view>
+        </view>
+        <view style="height: 10px; border-top: 10rpx double #DEDEDE"></view>
         <view style="display: flex;flex-direction: row;justify-content: center">
             <text class="distant-top" style="font-size: 25rpx">欢迎您，</text>
             <text class="dilate">{{ userName }}（{{ workshop_name }}-{{ work_type_name }}-{{ pos_name }}）</text>

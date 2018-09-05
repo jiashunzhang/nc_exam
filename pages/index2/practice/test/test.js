@@ -20,7 +20,8 @@ Page({
         question_micro_view_arr: [],
         qmv_hidden: true,
         window_height: "0",
-        freeze: false
+        freeze: false,
+        page_unloaded: false
     },
 
   /**
@@ -123,16 +124,20 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-  
-  },
+    onHide: function () {
+        this.setData({
+            page_unloaded: true
+        });
+    },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-  
-  },
+    onUnload: function () {
+        this.setData({
+            page_unloaded: true
+        });
+    },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -189,31 +194,7 @@ Page({
     onHandin: function (e) {
         let that = this
         let my_session_key = wx.getStorageSync("my_session_key");
-        wx.request({
-            url: "https://ncexam.jingjingjing.wang/accumulatePoints",
-            data: {
-                acc_type: "参与积分",
-                score: 0
-            },
-            header: {
-                "Cookie": my_session_key,
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            method: "POST",
-            success: function (data, statusCode, header) {
-                let resp = data.data;
-                if (resp == "" || resp == undefined || resp == null)
-                    wx.showModal({
-                        title: "异常",
-                        content: "服务器未返回积分数据。"
-                    });
-                else if (resp.errmsg)
-                    wx.showModal({
-                        title: "异常",
-                        content: resp.errmsg
-                    });
-            }
-        });
+        
         if(this.data.done_count != this.data.question_count) {
             wx.showModal({
                 title: "提示",
@@ -296,7 +277,8 @@ function countDown(that) {
             count_seconds: that.data.count_seconds + 1000,
             count_time: time_format(that.data.count_seconds)
         });
-        countDown(that);
+        if(!that.data.page_unloaded)
+            countDown(that);
     }, 1000);
 }
 function time_format(micro_second) {

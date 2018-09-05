@@ -10,12 +10,12 @@
         <block wx:if="{{ fullwork_packet != null }}">
             <text wx:if="{{ fullwork_packet == -1 }}" style="font-size: 30rpx; color: #FF7F24; margin: 100rpx 0 5rpx 0">本次练习无全勤红包。</text>
             <text wx:elif="{{ fullwork_packet == 0 }}" style="font-size: 30rpx; color: blue; margin: 100rpx 0 5rpx 0">唉呀，全勤红包里空空如也。祝您下次好运！</text>
-            <text wx:else style="font-size: 30rpx; color: red; margin: 100rpx 0 5rpx 0">恭喜！您开到了{{ fullwork_rp }}元的全勤红包！</text>
+            <text wx:else style="font-size: 30rpx; color: red; margin: 100rpx 0 5rpx 0">恭喜！您开到了{{ fullwork_packet }}元的全勤红包！</text>
         </block>
         <block wx:if="{{ fullmark_packet != null }}">
             <text wx:if="{{ fullmark_packet == -1 }}" style="font-size: 30rpx; color: #FF7F24; margin: 5rpx 0 100rpx 0">本次练习无满分红包。</text>
             <text wx:elif="{{ fullmark_packet == 0 }}" style="font-size: 30rpx; color: blue; margin: 5rpx 0 100rpx 0">唉呀，满分红包里空空如也。祝您下次好运！</text>
-            <text wx:else style="font-size: 30rpx; color: #FF7F24; margin: 5rpx 0 100rpx 0">恭喜！您开到了{{ fullmark_rp }}元的满分红包！</text>
+            <text wx:else style="font-size: 30rpx; color: #FF7F24; margin: 5rpx 0 100rpx 0">恭喜！您开到了{{ fullmark_packet }}元的满分红包！</text>
         </block>
     </view>
     <!--<text wx:elif="{{ allow_red_packet == '0' }}" style="margin: 100rpx 0 5rpx 0"></text>-->

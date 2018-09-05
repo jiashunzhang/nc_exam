@@ -1,4 +1,39 @@
 <!--pages/index2/wrongs/wrongs.wxml-->
-<view>
-    
+<view style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: flex-start; align-items: center">
+    <view style="width: 100%; display:flex; flex-direction: row; justify-content: center; align-items: center">
+        选择时间范围：
+        <picker mode="date" value="{{ date_start }}" bindchange="onDateStartChange" >
+            <view class="picker">
+                {{ date_start }}
+            </view>
+        </picker>
+        ~
+        <picker mode="date" value="{{ date_end }}" bindchange="onDateEndChange">
+            <view class="picker">
+                {{ date_end }}
+            </view>
+        </picker>
+        <button type="primary" bindtap="onSetDateClicked" size="mini">确定</button>
+    </view>
+    <scroll-view wx:if="{{ wrong_list.length != 0 }}" style="height: {{ list_view_height }}; margin-top: 10px; display: flex; flex-direction: column; align-items: center; white-space: normal" scroll-y="true">
+        <view class="weui-form-preview" wx:for="{{ wrong_list }}" wx:key="{{ item.question_id }}" style="margin-bottom: 25rpx; border-radius: 25rpx">
+            <view class="weui-form-preview__hd" bindtap="onShowDetail" data-test_question_id="{{ item.test_question_id }}" data-question_id="{{ item.question_id }}" data-question_title="{{ item.question_title }}" data-question_answer_texts="{{ item.question_answer_texts }}" data-question_right_answers="{{ item.question_right_answers }}" data-question_type="{{ item.question_type }}">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label" style="text-align-last: auto; text-indent: 2em; color: black; line-height: 35rpx">{{ item.question_title }}</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__bd" bindtap="onShowDetail" data-test_question_id="{{ item.test_question_id }}" data-question_id="{{ item.question_id }}" data-question_title="{{ item.question_title }}" data-question_answer_texts="{{ item.question_answer_texts }}" data-question_right_answers="{{ item.question_right_answers }}" data-question_type="{{ item.question_type }}">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">题型</view>
+                    <view class="weui-form-preivew__value">{{ item.question_type }}</view>
+                    <view class="weui-form-preview__label">答错次数</view>
+                    <view class="weui-form-preview__value">{{ item.wrong_count }}</view>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <view wx:else style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center">
+        <image src="https://ncexam-1255671825.cos.ap-chengdu.myqcloud.com/%E8%87%AA%E4%B9%A0.png" style="width: 200rpx; height: 200rpx"></image>
+        <text>太棒了！没有频繁出错的试题。</text>
+    </view>
 </view>

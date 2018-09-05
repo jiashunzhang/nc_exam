@@ -24,10 +24,8 @@ Page({
       let that = this;
       let my_session_key = wx.getStorageSync("my_session_key");
       wx.request({
-        url: "https://ncexam.jingjingjing.wang/accumulatePoints",
+        url: "https://ncexam.jingjingjing.wang/getCurrentAccumulatePoints",
         data: {
-          acc_type: "得分积分",
-          score: options.score,
           test_paper_id: options.test_paper_id
         },
         header: {

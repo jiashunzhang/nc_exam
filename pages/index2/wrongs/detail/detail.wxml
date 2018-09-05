@@ -1,0 +1,36 @@
+<!--pages/index2/wrongs/detail/detail.wxml-->
+<text style="font-size: 25rpx">-♦ 试题详情 ♦-</text>
+<view style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: flex-start; background-color: #FFFAF0; border-radius: 25rpx; margin-top: 30rpx">
+    <view style="width: 95%; text-indent: 2em; align-self: center">
+        （{{ question_type }}）{{ question_title }}
+    </view>
+    <checkbox-group wx:if="{{ question_type == '多选题' }}" bindchange="onAnswer">
+        <view wx:for="{{ question_answer_list }}" wx:key="{{ index }}" style="display: flex; flex-direction: column; text-indent: -2em; padding-left: 2em; margin-left:90rpx">
+            <view style="margin:0; padding: 0"><checkbox value="{{ ms_ss_selections[index] }}"></checkbox>{{ item }}</view>
+        </view>
+    </checkbox-group>
+    <radio-group wx:else bindchange="onAnswer">
+        <view wx:for="{{ question_answer_list }}" wx:key="{{ index }}" style="display: flex; flex-direction: column; text-indent: -2em; padding-left: 2em; margin-left: 90rpx">
+            <view style="margin:0; padding: 0">
+                <radio wx:if="{{ question_type == '单选题' }}" value="{{ ms_ss_selections[index] }}"></radio>
+                <radio wx:else value="{{ js_selections[index] }}"></radio>
+                {{ item }}
+            </view>
+        </view>
+    </radio-group>
+    <text style="height: 50rpx"></text>
+    <view wx:if="{{ show_answers }}" style="display: flex; flex-direction: column">
+        <view>正确答案：<text style="color: green">{{ question_right_answer }}</text></view>
+        <view>本次选择：<text style="color: {{ my_cur_answers == question_right_answer ? 'green' : 'red' }}">{{ my_cur_answers }}</text></view>
+        <view>您曾选择的错误答案：<text style="color: red">{{ wrong_answers }}</text></view>
+    </view>
+    <view wx:else style="width: 100%; display: flex; justify-content: center">
+        <button type="warn" size="mini" bindtap="onShowAnswers" style="margin-bottom: 10rpx">查看答案</button>
+    </view>
+</view>
+<view style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: flex-start; background-color: #FFFAF0; border-radius: 25rpx; margin-top: 20rpx">
+    <text style="font-size: 30rpx">错题笔记：({{ wrong_note_length }}/140)</text>
+    <textarea value ="{{ wrong_note }}" bindinput="onWrongNoteInput" style="width: 98%; height: 200rpx; border: 1rpx solid green; border-radius: 25rpx; align-self: center; margin-bottom: 10rpx; font-size: 30rpx; background-color: white">
+    </textarea>
+    <button type="primary" size="mini" style="align-self: center; margin-bottom: 10rpx" bindtap="onSaveWrongNote">保存</button>
+</view>

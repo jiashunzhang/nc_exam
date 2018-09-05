@@ -169,7 +169,7 @@ Page({
     onShowChangelog: function(event) {
         wx.showModal({
             title: "版本变化",
-            content: "初步实现红包功能。",
+            content: "初步上线错题统计功能。",
             showCancel: false
         });
     },

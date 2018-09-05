@@ -17,7 +17,8 @@
         "pages/index2/exam/test/score/score",
         "pages/index2/wrongs/wrongs",
         "pages/index2/examinfo/examinfo",
-        "pages/index2/redpacket/redpacket"
+        "pages/index2/redpacket/redpacket",
+        "pages/index2/wrongs/detail/detail"
     ],
     "window": {
         "backgroundTextStyle": "light",
