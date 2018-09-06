@@ -6,14 +6,14 @@
     </view>
     <checkbox-group wx:if="{{ question_type == '多选题' }}" bindchange="onAnswer">
         <view wx:for="{{ question_answer_list }}" wx:key="{{ index }}" style="display: flex; flex-direction: column; text-indent: -2em; padding-left: 2em; margin-left:90rpx">
-            <view style="margin:0; padding: 0"><checkbox value="{{ ms_ss_selections[index] }}"></checkbox>{{ item }}</view>
+            <view style="margin:0; padding: 0"><checkbox value="{{ ms_ss_selections[index] }}" disabled="{{ freeze }}"></checkbox>{{ item }}</view>
         </view>
     </checkbox-group>
     <radio-group wx:else bindchange="onAnswer">
         <view wx:for="{{ question_answer_list }}" wx:key="{{ index }}" style="display: flex; flex-direction: column; text-indent: -2em; padding-left: 2em; margin-left: 90rpx">
             <view style="margin:0; padding: 0">
-                <radio wx:if="{{ question_type == '单选题' }}" value="{{ ms_ss_selections[index] }}"></radio>
-                <radio wx:else value="{{ js_selections[index] }}"></radio>
+                <radio wx:if="{{ question_type == '单选题' }}" value="{{ ms_ss_selections[index] }}" disabled="{{ freeze }}"></radio>
+                <radio wx:else value="{{ js_selections[index] }}" disabled="{{ freeze }}"></radio>
                 {{ item }}
             </view>
         </view>

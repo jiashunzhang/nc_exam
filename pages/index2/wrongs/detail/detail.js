@@ -19,7 +19,8 @@ Page({
       ms_ss_selections: [ "A", "B", "C", "D" ],
       js_selections: [ "√", "×" ],
       show_answers: false,
-      my_cur_answers: ""
+      my_cur_answers: "未作答。",
+      freeze: false
   },
 
   /**
@@ -187,7 +188,8 @@ Page({
     },
     onShowAnswers: function() {
         this.setData({
-            show_answers: true
+            show_answers: true,
+            freeze: true
         });
     }
 })

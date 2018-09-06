@@ -17,7 +17,9 @@ data: {
     undone_exam_count: 0,
     mem_allow_rp: 1,
     animation_left: null,
-    animation_right: null
+    animation_right: null,
+    nb_list: [],
+    rp_nb_list: []
 },
     getIndexInfo: function(that) {
         let my_session_key = wx.getStorageSync("my_session_key");
@@ -57,7 +59,9 @@ data: {
                         work_type_name: resp.mem_wtn,
                         workshop_name: resp.mem_dep,
                         pos_name: resp.mem_pos,
-                        mem_allow_rp: resp.mem_allow_rp
+                        mem_allow_rp: resp.mem_allow_rp,
+                        nb_list: resp.nb,
+                        rp_nb_list: resp.rnb
                     });
 
                     wx.setStorageSync("allow_red_packet", resp.mem_allow_rp);
@@ -226,13 +230,15 @@ data: {
         query.select("#container_left").boundingClientRect();
         query.select("#nb_left").boundingClientRect();
         query.exec((res) => {
-            this.nbScrollLeft(res[0].height, res[1].height);
+            if (res[0].height < res[1].height)
+                this.nbScrollLeft(res[0].height, res[1].height);
         });
 
         let query2 = wx.createSelectorQuery();
         query2.select("#container_right").boundingClientRect();
         query2.select("#nb_right").boundingClientRect();
         query2.exec((res) => {
+            if (res[0].height < res[1].height)
             this.nbScrollRight(res[0].height, res[1].height);
         });
     }

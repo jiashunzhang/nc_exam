@@ -17,31 +17,19 @@
                 <text style="font-size: 25rpx; color: blue">♦通知♦</text>
                 <view style="height: 200rpx; width: 100%; overflow: hidden" id="container_left">
                     <view class="notice_board" style="border-right: 1rpx solid #DEDEDE" id="nb_left" animation="{{ animation_left }}">
-                        <view>测试1</view>
-                        <view>测试1</view>
-                        <view>测试1</view>
-                        <view>测试1</view>
-                        <view>测试1</view>
-                        <view>测试1</view>
-                        <view>测试1</view>
-                        <view>测试1</view>
+                        <view wx:for="{{ nb_list }}" wx:key="{{ index }}" style="color: {{ item.color }}; text-indent: -1.5em; padding-left: 2em">
+                            🔔{{ item.content }}
+                        </view>
                     </view>
                 </view>
             </view>
             <view style="width: 50%; display: flex; flex-direction: column; align-items: center">
-                <text style="font-size: 25rpx; color: red">💴奖励💴</text>
+                <text style="font-size: 25rpx; color: red">⚪奖励⚪</text>
                 <view style="height: 200rpx; width: 100%; overflow: hidden" id="container_right">
                     <view class="notice_board" id="nb_right" animation="{{ animation_right }}">
-                        <view>测试1</view>
-                        <view>测试1</view>
-                        <view>测试1</view>
-                        <view>测试1</view>
-                        <view>测试1</view>
-                        <view>测试1</view>
-                        <view>测试1</view>
-                        <view>测试1</view>
-                        <view>测试1</view>
-                        <view>测试1</view>
+                        <view wx:for="{{ rp_nb_list }}" wx:key="{{ index }}" style="color: {{ item.color }}; text-indent: -1.5em; padding-left: 2em">
+                            💯{{ item.content }}
+                        </view>
                     </view>
                 </view>
             </view>
