@@ -239,7 +239,7 @@ data: {
         query2.select("#nb_right").boundingClientRect();
         query2.exec((res) => {
             if (res[0].height < res[1].height)
-            this.nbScrollRight(res[0].height, res[1].height);
+                this.nbScrollRight(res[0].height, res[1].height);
         });
     }
 });
