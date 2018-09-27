@@ -349,7 +349,9 @@ function handinPaper(that, paper_detail, my_session_key) {
             } else if(resp.errmsg == "OK") {
                 wx.request({
                     url: "https://ncexam.jingjingjing.wang/signin",
-                    data: {},
+                    data: {
+                        score: resp.score
+                    },
                     method: "POST",
                     header: {
                         "Cookie": my_session_key,
