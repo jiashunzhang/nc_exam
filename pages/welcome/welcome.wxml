@@ -6,7 +6,7 @@
     </view>
     <view wx:else style="width: 100%;margin: 0;padding: 0;display: flex;flex-direction: column;align-items: center">
         <text class="title" style="margin-top: 50rpx">北京局集团公司</text>
-        <text class="title" bind:tap="onQR">南仓站职工微信答题系统</text>
+        <text class="title" bind:tap="onQR">南仓站职工业务学习考试系统</text>
         <view style="display: flex; flex-direction: column; align-items: center; justify-content:center; margin: 0 0 40rpx 0; padding: 0">
             <!--<image src="{{ userInfo.avatarUrl }}" style="width: 128rpx;height: 128rpx;margin-top: 160rpx"></image>
             <text style="margin-bottom: 80rpx">{{ userInfo.nickName }}</text>-->
@@ -28,7 +28,7 @@
         <button wx:if="{{ !rejectlogin }}" type="primary" style="margin: 15rpx" bind:tap="onCurrentUserLogin" disabled="{{ privateUserInfo ? '' : true }}">使用当前用户登录</button><button type="default" bind:tap="onOtherUserLogin" disabled="true">使用其他用户登录</button>
         <view style="position: absolute; bottom: 0">
             <text style="font-size: 25rpx;color: white">南仓站信息化车间©{{ curYear }}|</text>
-            <text style="font-size: 25rpx; color: white;text-decoration: underline" bind:tap="onShowChangelog">0.0.18</text>
+            <text style="font-size: 25rpx; color: white;text-decoration: underline" bind:tap="onShowChangelog">0.0.19</text>
         </view>
     </view>
 </view>

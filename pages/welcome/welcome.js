@@ -169,7 +169,7 @@ Page({
     onShowChangelog: function(event) {
         wx.showModal({
             title: "版本变化",
-            content: "增加公告牌。",
+            content: "完善红包功能。",
             showCancel: false
         });
     },

@@ -11,6 +11,8 @@ Page({
         elapsed: "",
         fullwork_packet: null,
         fullmark_packet: null,
+        encourage_packet: null,
+        task_packet: null,
         show_red_packet_image: true,
         allow_red_packet: "1",
         accumulate_points: 0,
@@ -165,7 +167,9 @@ Page({
                 }
                 that.setData({
                     fullwork_packet: resp.fwp,
-                    fullmark_packet: resp.fmp
+                    fullmark_packet: resp.fmp,
+                    encourage_packet: resp.enc,
+                    task_packet: resp.task
                 });
             },
             complete: function() {
