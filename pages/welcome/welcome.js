@@ -169,7 +169,7 @@ Page({
     onShowChangelog: function(event) {
         wx.showModal({
             title: "版本变化",
-            content: "完善红包功能。",
+            content: "1、修复练习交卷时的“未知异常”。\n2、修复第一次进入首页时公告栏不滚动的Bug。",
             showCancel: false
         });
     },

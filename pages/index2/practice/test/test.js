@@ -331,7 +331,7 @@ function handinPaper(that, paper_detail, my_session_key) {
         },
         success: function (data, statusCode, header) {
             var resp = data.data;
-            //console.log(JSON.stringify(resp));
+            console.log(JSON.stringify(resp));
             if (resp.errmsg != undefined && resp.errmsg != null && resp.errmsg != "OK") {
                 wx.showModal({
                     title: "异常",

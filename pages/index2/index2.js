@@ -98,8 +98,7 @@ data: {
         this.getIndexInfo(this);
         this.PCountTimerProc();
         this.initPCountTimer();
-        this.getHeight();
-        this.getHeight();
+        setTimeout(this.getHeight, 500);
     },
 
   /**

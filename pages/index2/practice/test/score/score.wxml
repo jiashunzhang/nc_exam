@@ -5,7 +5,7 @@
     <text style="font-size: 90rpx;color: {{ score >= passing_score ? 'red' : 'green' }}">{{ score }}</text>
     <text style="font-size: 30rpx">及格分数：{{ passing_score }}</text>
     <!--<view wx:if="{{ score >= passing_score && allow_red_packet == '1' }}" style="display: flex; flex-direction: column; justify-content: center; align-items: center">-->
-    <view style="display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: 40rpx">
+    <view  wx:if="{{ allow_red_packet == '1' }}" style="display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: 40rpx">
         <image wx:if="{{ show_red_packet_image }}" src="https://ncexam-1255671825.cos.ap-chengdu.myqcloud.com/hongbao.jpg" style="width: 200rpx;height: 200rpx;margin: 100rpx 0 100rpx 0" bind:tap="onRedPacketOpened" />
         <block wx:if="{{ fullwork_packet != null && fullwork_packet != -1 }}">
             <!--<text wx:if="{{ fullwork_packet == -1 }}" style="font-size: 30rpx; color: #FF7F24; margin: 100rpx 0 5rpx 0">本次练习无全勤红包。</text>-->
