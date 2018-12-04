@@ -315,7 +315,7 @@ function handinPaper(that, paper_detail, my_session_key) {
             paper_detail[i] = (paper_detail[i].sort().join());
         }
     }
-    //console.log(JSON.stringify(paper_detail));
+    console.log(JSON.stringify(paper_detail));
 
     wx.request({
         url: "https://ncexam.jingjingjing.wang/handin",

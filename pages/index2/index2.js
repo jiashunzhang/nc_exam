@@ -137,14 +137,14 @@ data: {
   },
     onCardTap: function(event) {
         //if (event.currentTarget.dataset.tapName == "wrongs" || event.currentTarget.dataset.tapName == "business_learn"){
-        if (event.currentTarget.dataset.tapName == "business_learn") {
+        /*if (event.currentTarget.dataset.tapName == "business_learn") {
             wx.showModal({
                 title: "提示",
                 content: "该功能尚未开通。",
                 showCancel: false
             });
             return;
-        }
+        }*/
         wx.navigateTo({
             url: "./" + event.currentTarget.dataset.tapName + "/" + event.currentTarget.dataset.tapName
         });
