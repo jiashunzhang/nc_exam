@@ -9,9 +9,9 @@
                             <text decode="{{ true }}">&nbsp;&nbsp;&nbsp;&nbsp;{{ index + 1 }}. {{ ques.question_title }}</text>
                             <radio-group name="{{ ques.question_id }}" bind:change="onQuestionChange" data-qid="{{ ques.question_id }}">
                                 <view wx:for="{{ ques.question_answer_texts }}" wx:key="*this">
-                                    <view style="display: flex;flex-direction: row;align-items: center">
+                                    <view style="display: flex;flex-direction: row;align-items: flex-start">
                                         <text decode="{{ true }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
-                                        <radio value="{{ item.header }}" checked="{{ false }}" /><text>{{ item.header }}.</text>
+                                        <radio value="{{ item.header }}" checked="{{ false }}" disabled="{{ freeze }}" /><text>{{ item.header }}.</text>
                                         <text>{{ item.body }}</text>
                                         <text style="height: 15rpx"> </text>
                                     </view>
@@ -22,9 +22,9 @@
                             <text decode="{{ true }}">&nbsp;&nbsp;&nbsp;&nbsp;{{ index + 1 }}. {{ ques.question_title }}</text>
                             <checkbox-group name="{{ ques.question_id }}" bind:change="onQuestionChange" data-qid="{{ ques.question_id }}">
                                 <view wx:for="{{ ques.question_answer_texts }}" wx:key="*this">
-                                    <view style="display: flex;flex-direction: row;align-items: center">
+                                    <view style="display: flex;flex-direction: row;align-items: flex-start">
                                         <text decode="{{ true }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
-                                        <checkbox value="{{ item.header }}" checked="{{ false }}" /><text>{{ item.header }}.</text>
+                                        <checkbox value="{{ item.header }}" checked="{{ false }}" disabled="{{ freeze }}" /><text>{{ item.header }}.</text>
                                         <text>{{ item.body }}</text>
                                         <text style="height: 15rpx"> </text>
                                     </view>
@@ -35,9 +35,9 @@
                             <text decode="{{ true }}">&nbsp;&nbsp;&nbsp;&nbsp;{{ index + 1 }}. {{ ques.question_title }}</text>
                             <radio-group name="{{ ques.question_id }}" bind:change="onQuestionChange" data-qid="{{ ques.question_id }}">
                                 <view wx:for="{{ ques.question_answer_texts }}" wx:key="*this">
-                                    <view style="display: flex;flex-direction: row;align-items: center">
+                                    <view style="display: flex;flex-direction: row;align-items: flex-start">
                                         <text decode="{{ true }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
-                                        <radio value="{{ item.body }}" checked="{{ false }}" />
+                                        <radio value="{{ item.body }}" checked="{{ false }}" disabled="{{ freeze }}" />
                                         <text>{{ item.body }}</text>
                                         <text style="height: 15rpx"> </text>
                                     </view>

@@ -4,13 +4,37 @@
         <template is="navCard" data="{{ img_url: '../../statics/images/exam_selected.png', text: '在线考试', bg_color: '#E9967A', tap_name: 'exam' }}" />
         <template is="navCard" data="{{ img_url: '../../statics/images/stat.png', text: '错题统计', bg_color: '#F0E68C', tap_name: 'wrongs' }}" />
         <template is="navCard" data="{{ img_url: '../../statics/images/exam_info.png', text: '考试信息', bg_color: '#90EE90', tap_name: 'examinfo' }}" />
-        <template is="navCard" data="{{ img_url: '../../statics/images/edu.png', text: '业务学习', bg_color: '#DDA0DD', tap_name: 'business_learn' }}" />
+        <template is="navCard" data="{{ img_url: '../../statics/images/edu.png', text: '业务学习', bg_color: '#DDA0DD', tap_name: 'business' }}" />
+        <template is="navCard" wx:if="{{ mem_allow_rp == '1' }}" data="{{ img_url: '../../statics/images/redpacket.png', text: '红包与积分', bg_color: '#BDB76B', tap_name: 'redpacket' }}" />
         <view wx:if="{{ undone_exam_count != 0 }}" style="padding: 0; margin: 0; position: absolute; top: 10 rpx; left: 430rpx">
             <image src="../../statics/images/tip_count.png" style="margin: 0; width: 54rpx; height: 54rpx"></image>
             <text style="text-align: center; width: 100%; height: 100%; position: absolute; left: 0; top: 0; color: #B13E35">{{ undone_exam_count }}</text>
         </view>
     </view>
     <view class="box2">
+        <view style="width: 100%; display: flex; justify-content: center">
+            <view style="width: 50%; display: flex; flex-direction: column; align-items: center">
+                <text style="font-size: 25rpx; color: blue">♦通知♦</text>
+                <view style="height: 200rpx; width: 100%; overflow: hidden; border-right: 1rpx solid #DEDEDE" id="container_left">
+                    <view class="notice_board" id="nb_left" animation="{{ animation_left }}">
+                        <view wx:for="{{ nb_list }}" wx:key="{{ index }}" style="color: {{ item.color }}; text-indent: -1.5em; padding-left: 2em">
+                            🔔{{ item.content }}
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view style="width: 50%; display: flex; flex-direction: column; align-items: center">
+                <text style="font-size: 25rpx; color: red">⚪奖励⚪</text>
+                <view style="height: 200rpx; width: 100%; overflow: hidden" id="container_right">
+                    <view class="notice_board" id="nb_right" animation="{{ animation_right }}">
+                        <view wx:for="{{ rp_nb_list }}" wx:key="{{ index }}" style="color: {{ item.color }}; text-indent: -1.5em; padding-left: 2em">
+                            💯{{ item.content }}
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view style="height: 10px; border-top: 10rpx double #DEDEDE"></view>
         <view style="display: flex;flex-direction: row;justify-content: center">
             <text class="distant-top" style="font-size: 25rpx">欢迎您，</text>
             <text class="dilate">{{ userName }}（{{ workshop_name }}-{{ work_type_name }}-{{ pos_name }}）</text>

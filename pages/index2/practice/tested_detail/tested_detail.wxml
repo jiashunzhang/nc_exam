@@ -1,16 +1,16 @@
 <!--pages/tested_detail/tested_detail.wxml-->
 <view>
-    <view wx:for="{{ question_groups }}" wx:key="type_name">
+    <view wx:for="{{ question_groups }}" wx:for-index="idx" wx:key="type_name">
         <questions>
-            <view slot="type_name">{{ item.type_name }}</view>
+            <view slot="type_name">{{ q_type_num_map[idx] }}、{{ item.type_name }}</view>
             <view slot="questions">
                 <view wx:for="{{ item.detail }}" wx:key="*this" style="display: flex;flex-direction: column" wx:for-item="ques">
                     <view style="background-color: {{ ques.question_right_answers == ques.answers ? '#CCFFCC' : '#FFCCCC' }}">
                         <text decode="{{ true }}">&nbsp;&nbsp;&nbsp;&nbsp;{{ index + 1 }}. {{ ques.question_title }}</text>
                         <view wx:for="{{ ques.question_answer_texts }}" wx:key="*this">
-                            <view style="display: flex;flex-direction: row;align-items: center">
+                            <view style="display: flex;flex-direction: row;align-items: flex-start">
                                 <text decode="{{ true }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
-                                <text wx:if="{{ item.header }}">{{  item.header }}.</text>
+                                <text wx:if="{{ item.header }}">{{ item.header }}.</text>
                                 <text>{{ item.body }}</text>
                                 <text style="height: 15rpx"> </text>
                             </view>

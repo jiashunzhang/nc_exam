@@ -20,6 +20,8 @@ Page({
         question_micro_view_arr: [],
         qmv_hidden: true,
         window_height: "0",
+        freeze: false,
+        page_unloaded: false
     },
 
   /**
@@ -27,7 +29,7 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
-      var my_session_key = wx.getStorageSync('my_session_key');
+      var my_session_key = wx.getStorageSync("my_session_key");
       var res = wx.getSystemInfoSync();
 
       this.setData({
@@ -37,7 +39,7 @@ Page({
           window_width: res.windowWidth + "px",
           qmv_hidden: true
       });
-      console.log(this.data.window_width);
+
       wx.request({
           url: "https://ncexam.jingjingjing.wang/getRandomTest",
           data: {
@@ -122,16 +124,20 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-  
-  },
+    onHide: function () {
+        this.setData({
+            page_unloaded: true
+        });
+    },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-  
-  },
+    onUnload: function () {
+        this.setData({
+            page_unloaded: true
+        });
+    },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -186,8 +192,9 @@ Page({
         });
     },
     onHandin: function (e) {
-        var that = this
-        var my_session_key = wx.getStorageSync('my_session_key');
+        let that = this
+        let my_session_key = wx.getStorageSync("my_session_key");
+        
         if(this.data.done_count != this.data.question_count) {
             wx.showModal({
                 title: "提示",
@@ -253,6 +260,14 @@ Page({
 function countDown(that) {
     var sec_left = that.data.count_down_seconds;
     if(sec_left <= 0) {
+        that.setData({
+            freeze: true
+        });
+        wx.showModal({
+            title: "本次练习时间已到，试题已冻结，请交卷或返回放弃本次练习。",
+            content: "提示",
+            showCancel: false
+        });
         return;
     }
     setTimeout(function(){
@@ -262,7 +277,8 @@ function countDown(that) {
             count_seconds: that.data.count_seconds + 1000,
             count_time: time_format(that.data.count_seconds)
         });
-        countDown(that);
+        if(!that.data.page_unloaded)
+            countDown(that);
     }, 1000);
 }
 function time_format(micro_second) {
@@ -324,16 +340,52 @@ function handinPaper(that, paper_detail, my_session_key) {
                 });
                 return;
             }
-            else {
+            else if(resp === undefined || resp === null || resp == "") {
                 wx.showModal({
                     title: "异常",
-                    content: "服务嚣未返回数据。",
+                    content: "服务器未返回数据。",
+                    showCancel: false
+                });
+            } else if(resp.errmsg == "OK") {
+                wx.request({
+                    url: "https://ncexam.jingjingjing.wang/signin",
+                    data: {
+                        score: resp.score
+                    },
+                    method: "POST",
+                    header: {
+                        "Cookie": my_session_key,
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    success: function(signin_data, sign_statusCode, signin_Header) {
+                        let signin_resp = signin_data.data;
+                        if (signin_resp.errmsg != undefined && signin_resp.errmsg != null && signin_resp.errmsg != "OK") {
+                            wx.showModal({
+                                title: "异常",
+                                content: signin_resp.errmsg,
+                                showCancel: false
+                            });
+                        }
+                        else if (signin_resp === undefined || signin_resp === null || signin_resp == "") {
+                            wx.showModal({
+                                title: "异常",
+                                content: "服务器未返回签到数据。",
+                                showCancel: false
+                            });
+                        } else if (signin_resp.errmsg == "OK") {
+                            wx.redirectTo({
+                                url: "./score/score?score=" + resp.score + "&passing_score=" + resp.passing_score + "&test_paper_id=" + resp.test_paper_id + "&elapsed=" + that.data.count_time + "&signin_count=" + signin_resp.count
+                            });
+                        }
+                    }
+                });
+            } else {
+                wx.showModal({
+                    title: "异常",
+                    content: "未知异常。",
                     showCancel: false
                 });
             }
-            wx.redirectTo({
-                url: "./score/score?score=" + resp.score + "&passing_score=" + resp.passing_score + "&test_paper_id=" + resp.test_paper_id + "&elapsed=" + that.data.count_time
-            });
         }
     });
 }

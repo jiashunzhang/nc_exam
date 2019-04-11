@@ -1,0 +1,6 @@
+/* pages/index2/wrongs/detail/detail.wxss */
+Page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

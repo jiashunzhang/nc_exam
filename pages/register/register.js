@@ -172,7 +172,7 @@ Page({
                         return;
                     }
                     else {
-                        wx.navigateTo({
+                        wx.redirectTo({
                             url: "../index2/index2"
                         });
                     }

@@ -13,7 +13,8 @@ Page({
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         curYear: (new Date()).getFullYear(),
         privateUserInfo: null,
-        getUserLoopCount: 0
+        getUserLoopCount: 0,
+        if_qrcode: false
     },
 
   /**
@@ -165,6 +166,13 @@ Page({
             url: "../register/register"
         });
     },
+    onShowChangelog: function(event) {
+        wx.showModal({
+            title: "版本变化",
+            content: "1、修复练习交卷时的“未知异常”。\n2、修复第一次进入首页时公告栏不滚动的Bug。",
+            showCancel: false
+        });
+    },
     getPrivateUserInfoLoop: function() {
         this.setData({
             getUserLoopCount: this.data.getUserLoopCount + 1
@@ -177,5 +185,10 @@ Page({
                 privateUserInfo: app.globalData.privateUserInfo
             });
         }
+    },
+    onQR: function() {
+        this.setData({
+            if_qrcode: !this.data.if_qrcode
+        });
     }
-})
+});
